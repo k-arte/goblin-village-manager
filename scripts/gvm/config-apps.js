@@ -251,7 +251,7 @@ GVM.ConfigApp = class GVMConfigApp extends Application {
 
     return `
       <section class="gvm-config-section">
-        <h3>Бонус-награда</h3>
+        <h3>Бонус: цена → награда</h3>
         <div class="gvm-config-grid">
           ${this._field("source", "Источник", data.source || "")}
           ${this._field("costStat", "Стат оплаты", cost.stat || "treasury")}
@@ -262,7 +262,7 @@ GVM.ConfigApp = class GVMConfigApp extends Application {
         </div>
 
         <div class="gvm-reward-drop">
-          <strong>Перетащите предмет-награду сюда</strong>
+          <strong>Перетащите Item-награду сюда</strong>
           <p>${reward.name ? `${GVM.escapeHtml(reward.name)} (${GVM.escapeHtml(reward.uuid || "")})` : "Награда не назначена."}</p>
           drop-reward-clearОчистить награду</button>
         </div>

@@ -1,0 +1,45 @@
+<article class="gvm-facility-card status-{{status}} type-{{type}}" data-item-id="{{itemId}}" style="--gvm-card-art: url('{{art}}');">
+  <div class="gvm-facility-shade"></div>
+
+  <header class="gvm-facility-header">
+    <div class="gvm-facility-title-block">
+      <h4>{{title}}</h4>
+      <span>{{typeLabel}} · {{statusLabel}} · L{{level}}/{{maxLevel}}</span>
+    </div>
+
+    <button type="button" class="gvm-facility-action" data-gvm-control="facility-actions" title="Функции">
+      <i class="fas fa-hammer"></i>
+    </button>
+  </header>
+
+  {{#if slots.length}}
+  <div class="gvm-facility-slots">
+    {{#each slots}}
+      <span class="gvm-slot {{#if filled}}filled{{/if}}" title="{{type}}">
+        <i class="{{icon}}"></i>
+      </span>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  <section class="gvm-facility-boons">
+    <strong>Boons</strong>
+    {{#if boons.length}}
+      <ul>
+        {{#each boons}}
+          <li>{{label}}</li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <p>No boons configured.</p>
+    {{/if}}
+  </section>
+
+  {{#if services.length}}
+  <section class="gvm-facility-services">
+    {{#each services}}
+      <span>{{this}}</span>
+    {{/each}}
+  </section>
+  {{/if}}
+</article>

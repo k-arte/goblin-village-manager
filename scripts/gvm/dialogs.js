@@ -251,9 +251,6 @@ GVM.buildingDialog = function buildingDialog(actor, item) {
       json: {
         label: "Настроить",
         callback: () => GVM.editGvmData(actor, item)
-      },
-      close: {
-        label: "Закрыть"
       }
     }
   }).render(true);
@@ -284,9 +281,6 @@ GVM.reformDialog = function reformDialog(actor, item) {
       json: {
         label: "Настроить",
         callback: () => GVM.editGvmData(actor, item)
-      },
-      close: {
-        label: "Закрыть"
       }
     }
   }).render(true);
@@ -314,9 +308,6 @@ GVM.orderDialog = function orderDialog(actor, item) {
       json: {
         label: "Настроить",
         callback: () => GVM.editGvmData(actor, item)
-      },
-      close: {
-        label: "Закрыть"
       }
     }
   }).render(true);
@@ -348,9 +339,6 @@ GVM.bonusDialog = function bonusDialog(actor, item) {
       json: {
         label: "Настроить",
         callback: () => GVM.editGvmData(actor, item)
-      },
-      close: {
-        label: "Закрыть"
       }
     }
   }).render(true);
