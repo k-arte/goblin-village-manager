@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.3
+
+### Fixed
+
+- Stabilized release after failed experimental UI rewrite.
+- Restored last working item-based Group Actor settlement system.
+- Kept v0.3.2 functionality available as v0.3.3 release candidate.
+
+
 ## 0.3.0
 
 ### Added
