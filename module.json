@@ -42,6 +42,10 @@
     "scripts/gvm/ability-model.js",
     "scripts/gvm/ability-ui.js",
     "scripts/gvm/ability-builder.js",
+    "scripts/gvm/orders-v2.js",
+    "scripts/gvm/active-effects-v2.js",
+    "scripts/gvm/donations-v2.js",
+    "scripts/gvm/attack-v2.js",
     "scripts/main.js"
   ],
   "styles": [

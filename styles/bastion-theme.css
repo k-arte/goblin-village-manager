@@ -1406,3 +1406,42 @@
   color: var(--gvm-accent-strong, #f0d28b);
   border-color: color-mix(in srgb, var(--gvm-accent, #c9593f) 52%, transparent);
 }
+
+/* v0.7 stage 4: dark dialogs and readable build/ability forms */
+.app.window-app.dialog .window-content:has(.gvm-build-picker),
+.app.window-app.dialog .window-content:has(.gvm-ability-builder-form),
+.app.window-app.dialog .window-content:has(.gvm-resident-config-form),
+.app.window-app.dialog .window-content:has(.gvm-dialog) {
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--gvm-accent, #c9593f) 10%, transparent), transparent 38%),
+    linear-gradient(180deg, #0c111d, #07090e);
+  color: #e8e1d3;
+}
+
+.gvm-build-picker,
+.gvm-ability-builder-form,
+.gvm-resident-config-form,
+.gvm-dialog {
+  color: #e8e1d3;
+}
+
+.gvm-build-picker input,
+.gvm-build-picker select,
+.gvm-build-picker textarea,
+.gvm-ability-builder-form input,
+.gvm-ability-builder-form select,
+.gvm-ability-builder-form textarea,
+.gvm-resident-config-form input,
+.gvm-resident-config-form select,
+.gvm-resident-config-form textarea {
+  background: rgba(0, 0, 0, .28);
+  border: 1px solid rgba(230, 220, 200, .20);
+  border-radius: 5px;
+  color: #e8e1d3;
+}
+
+.gvm-mini-button.danger,
+.gvm-drawer-button.danger {
+  border-color: color-mix(in srgb, var(--gvm-danger, #ed1c24) 62%, transparent);
+  color: #ffb0b0;
+}

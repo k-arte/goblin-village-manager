@@ -145,7 +145,7 @@ GVM.toggleInlineActionDrawer = function toggleInlineActionDrawer(actor, item, ca
     else if (control === "create-ability") GVM.openAbilityBuilder(actor, { sourceType: "building", item });
     else if (control === "configure") GVM.openConfigForItem(actor, item);
     else if (control === "sheet") item.sheet?.render(true);
-    else if (control === "demolish") GVM.confirmDemolishBuilding(actor, item);
+    else if (control === "demolish") GVM.startDemolishBuildingOrder ? GVM.startDemolishBuildingOrder(actor, item) : GVM.confirmDemolishBuilding(actor, item);
     else if (control === "repair") {
       if (GVM.startRepairBuildingOrder) await GVM.startRepairBuildingOrder(actor, item);
       else ui.notifications.warn("Приказ починки будет добавлен на следующем этапе v0.7.");

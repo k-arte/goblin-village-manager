@@ -72,8 +72,7 @@ GVM.ConfigApp = class GVMConfigApp extends Application {
     return $(`
       <form class="gvm-config-form">
         <header class="gvm-config-header">
-          " alt="">
-          <div>
+              <div>
             <h2>${GVM.escapeHtml(this.item.name)}</h2>
             <p>${GVM.escapeHtml(kind || "unknown")}</p>
           </div>

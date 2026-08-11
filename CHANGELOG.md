@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.7.0
+
+### Added
+
+- Inline action drawers inside cards.
+- Ability model with add, replace, upgrade and disable behavior.
+- Automatic Bonuses and Services section.
+- Ability Builder for buildings and key residents.
+- Reward Item support for abilities.
+- Settlement-tracked active effects.
+- Minor order cycle processing.
+- Repair as a city order.
+- Demolition as a city order.
+- Order cancellation with proportional refunds.
+- Player donations to settlement treasury.
+- Random building damage on failed defense.
+
+### Fixed
+
+- Broken image/alt rendering.
+- Resident portrait rendering.
+- Independent settlement name handling.
+- Dark readable build picker and ability configuration UI.
+
+### Notes
+
+- Full native dnd5e ActiveEffect document generation remains planned for a later release.
+
+
 ## 0.6.2
 
 ### Added
