@@ -19,5 +19,7 @@
     "styles/settlement.css"
   ],
   "languages": [],
-  "packs": []
+  "packs": [],
+  "manifest": "https://github.com/k-arte/goblin-village-manager/releases/latest/download/module.json",
+  "download": "https://github.com/k-arte/goblin-village-manager/releases/latest/download/module.zip"
 }
