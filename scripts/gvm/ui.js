@@ -391,7 +391,7 @@ GVM.renderSettlementPanel = async function renderSettlementPanel(actor, panel) {
   panel.innerHTML = `
     <section class="gvm-bastion-board" data-gvm-actor-id="${actor.id}">
       <header class="gvm-bastion-title">
-        <h1>${GVM.escapeHtml(actor.name)}</h1>
+        <h1>${GVM.escapeHtml(GVM.getSettlementName(actor))}</h1>
       </header>
 
       ${GVM.renderKeyResidentsSection(actor)}
@@ -528,7 +528,7 @@ GVM.activatePanel = function activatePanel(actor, panel) {
       if (event.target.closest("[data-gvm-control]")) return;
 
       const item = actor.items.get(card.dataset.itemId);
-      if (item && card.classList.contains("gvm-facility-card")) GVM.openActionPopover ? GVM.openActionPopover(actor, item, card) : GVM.itemActionDialog(actor, item);
+      if (item && card.classList.contains("gvm-facility-card")) GVM.toggleInlineActionDrawer ? GVM.toggleInlineActionDrawer(actor, item, card) : GVM.itemActionDialog(actor, item, card);
       else if (item) GVM.openConfigForItem(actor, item);
     });
 

@@ -142,7 +142,7 @@ GVM.renderResidentCard = function renderResidentCard(actor, resident) {
 
   return `
     <article class="gvm-resident-card ${resident.active ? "active" : "inactive"}" data-resident-id="${GVM.escapeHtml(resident.id)}">
-      " alt="">
+      ${GVM.renderImg(img, "gvm-resident-portrait", name)}
 
       <div class="gvm-resident-main">
         <header>
