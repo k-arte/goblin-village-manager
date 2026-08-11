@@ -21,6 +21,7 @@
     "scripts/gvm/cycle.js",
     "scripts/gvm/render-context.js",
     "scripts/gvm/dialogs.js",
+    "scripts/gvm/config-apps.js",
     "scripts/gvm/ui.js",
     "scripts/main.js"
   ],

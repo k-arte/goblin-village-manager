@@ -330,3 +330,122 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* v0.5 stage 3 config app */
+.gvm-config-app .window-content {
+  background: #111217;
+  color: #d6d1c8;
+}
+
+.gvm-config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gvm-config-header {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid rgba(230, 220, 200, 0.22);
+  padding-bottom: 10px;
+}
+
+.gvm-config-header img {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(230, 220, 200, 0.24);
+}
+
+.gvm-config-header h2 {
+  margin: 0;
+  color: #e5ddcf;
+}
+
+.gvm-config-header p {
+  margin: 2px 0 0;
+  color: #a99f91;
+}
+
+.gvm-config-section {
+  border: 1px solid rgba(230, 220, 200, 0.18);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.gvm-config-section h3 {
+  margin: 0 0 8px;
+  color: #d8d2c8;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.gvm-config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 8px;
+}
+
+.gvm-config-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.gvm-config-field span {
+  font-size: 12px;
+  color: #b8afa2;
+}
+
+.gvm-config-field small {
+  color: #8f877b;
+  font-size: 11px;
+}
+
+.gvm-config-field input,
+.gvm-config-field select,
+.gvm-config-field textarea {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(230, 220, 200, 0.20);
+  border-radius: 5px;
+  color: #e5ddcf;
+  padding: 5px;
+}
+
+.gvm-config-field textarea {
+  min-height: 90px;
+  resize: vertical;
+  font-family: monospace;
+}
+
+.gvm-config-wide {
+  margin-top: 8px;
+}
+
+.gvm-config-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.gvm-reward-drop {
+  margin: 10px 0;
+  border: 1px dashed rgba(230, 220, 200, 0.35);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.gvm-reward-drop.dragover {
+  outline: 2px dashed #d7bb78;
+  background: rgba(120, 90, 30, 0.18);
+}
+
+.gvm-reward-drop p {
+  margin: 4px 0 8px;
+  color: #b8afa2;
+}
