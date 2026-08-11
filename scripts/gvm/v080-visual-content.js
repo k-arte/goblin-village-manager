@@ -78,8 +78,45 @@ GVM.v080ApplyBuildingVisuals = function v080ApplyBuildingVisuals(actor, root = d
   }
 };
 
+GVM.v080RemoveBrokenPortraitText = function v080RemoveBrokenPortraitText(root = document) {
+  const walker = document.createTreeWalker(
+    root,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode(node) {
+        const value = String(node.nodeValue || "");
+
+        if (
+          value.includes("gvm-resident-portrait") ||
+          value.includes("class=\"gvm-resident") ||
+          value.includes("alt=\"") ||
+          value.includes("}\" class=") ||
+          value.trim() === "}\"" ||
+          value.trim() === "\">"
+        ) {
+          return NodeFilter.FILTER_ACCEPT;
+        }
+
+        return NodeFilter.FILTER_REJECT;
+      }
+    }
+  );
+
+  const nodes = [];
+
+  while (walker.nextNode()) {
+    nodes.push(walker.currentNode);
+  }
+
+  for (const node of nodes) {
+    node.nodeValue = "";
+  }
+};
+
 GVM.v080ApplyResidentPortraits = function v080ApplyResidentPortraits(actor, root = document) {
   if (!actor || !GVM.getKeyResidents || !GVM.v080FindResidentCard) return;
+
+  GVM.v080RemoveBrokenPortraitText(root);
 
   const residents = GVM.getKeyResidents(actor) || [];
 
@@ -92,7 +129,14 @@ GVM.v080ApplyResidentPortraits = function v080ApplyResidentPortraits(actor, root
 
     card.classList.add("gvm-v080-resident-portrait-card");
 
-    let portraitBox = card.querySelector(".gvm-v080-resident-portrait-box");
+    card.querySelectorAll(".gvm-debug-resident-portrait").forEach(element => element.remove());
+
+    const existingBoxes = Array.from(card.querySelectorAll(".gvm-v080-resident-portrait-box"));
+    let portraitBox = existingBoxes[0] || null;
+
+    for (const extra of existingBoxes.slice(1)) {
+      extra.remove();
+    }
 
     if (!portraitBox) {
       portraitBox = document.createElement("div");
@@ -100,33 +144,36 @@ GVM.v080ApplyResidentPortraits = function v080ApplyResidentPortraits(actor, root
 
       const img = document.createElement("img");
       img.className = "gvm-v080-resident-portrait";
-      img.src = portrait;
-      img.alt = name;
       img.onerror = function () {
         img.src = "icons/svg/mystery-man.svg";
       };
 
       portraitBox.appendChild(img);
+    }
 
-      const header =
-        card.querySelector("header") ||
-        card.querySelector(".gvm-resident-header") ||
-        card.querySelector(".gvm-key-resident-header") ||
-        card.firstElementChild ||
-        card;
+    const img = portraitBox.querySelector("img") || document.createElement("img");
+    img.className = "gvm-v080-resident-portrait";
+    img.src = portrait;
+    img.alt = name;
+    img.onerror = function () {
+      img.src = "icons/svg/mystery-man.svg";
+    };
 
-      header.classList.add("gvm-v080-resident-header-with-portrait");
+    if (!img.parentElement) portraitBox.appendChild(img);
 
-      if (!header.querySelector(".gvm-v080-resident-portrait-box")) {
-        header.prepend(portraitBox);
-      }
-    } else {
-      const img = portraitBox.querySelector("img");
+    const header =
+      card.querySelector("header") ||
+      card.querySelector(".gvm-resident-header") ||
+      card.querySelector(".gvm-key-resident-header") ||
+      card.querySelector(".gvm-v080-resident-main") ||
+      card.firstElementChild ||
+      card;
 
-      if (img) {
-        img.src = portrait;
-        img.alt = name;
-      }
+    header.classList.add("gvm-v080-resident-header-with-portrait");
+
+    if (portraitBox.parentElement !== header) {
+      portraitBox.remove();
+      header.prepend(portraitBox);
     }
   }
 };
