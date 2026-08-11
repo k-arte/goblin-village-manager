@@ -157,6 +157,7 @@ GVM.renderResidentCard = function renderResidentCard(actor, resident) {
       </div>
 
       <div class="gvm-resident-actions">
+        <button type="button" class="gvm-mini-button primary" data-gvm-control="create-resident-ability">+ Способность</button>
         <button type="button" class="gvm-mini-button secondary" data-gvm-control="configure-resident">Настроить</button>
         <button type="button" class="gvm-mini-button danger" data-gvm-control="remove-resident">Убрать</button>
       </div>

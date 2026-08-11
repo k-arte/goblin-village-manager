@@ -80,6 +80,7 @@ GVM.renderInlineDrawer = function renderInlineDrawer(actor, item) {
 
         <section class="gvm-drawer-group">
           <h4>Управление</h4>
+          ${isBuilding ? GVM.drawerButton("Создать способность", "create-ability", { cls: "primary", icon: "fas fa-plus" }) : ""}
           ${GVM.drawerButton("Настроить", "configure", { cls: "secondary", icon: "fas fa-cog" })}
           ${GVM.drawerButton("Item Sheet", "sheet", { cls: "secondary", icon: "fas fa-scroll" })}
           ${data.kind !== GVM.KIND.BUILDING ? GVM.drawerButton("Удалить", "delete-item", { cls: "danger", icon: "fas fa-trash" }) : ""}
@@ -141,6 +142,7 @@ GVM.toggleInlineActionDrawer = function toggleInlineActionDrawer(actor, item, ca
 
     if (control === "upgrade") GVM.upgradeBuilding(actor, item);
     else if (control === "workers") GVM.assignWorkers(actor, item);
+    else if (control === "create-ability") GVM.openAbilityBuilder(actor, { sourceType: "building", item });
     else if (control === "configure") GVM.openConfigForItem(actor, item);
     else if (control === "sheet") item.sheet?.render(true);
     else if (control === "demolish") GVM.confirmDemolishBuilding(actor, item);

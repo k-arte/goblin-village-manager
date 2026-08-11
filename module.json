@@ -41,6 +41,7 @@
     "scripts/gvm/journal-ui.js",
     "scripts/gvm/ability-model.js",
     "scripts/gvm/ability-ui.js",
+    "scripts/gvm/ability-builder.js",
     "scripts/main.js"
   ],
   "styles": [

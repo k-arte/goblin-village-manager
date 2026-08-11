@@ -508,6 +508,9 @@ GVM.activatePanel = function activatePanel(actor, panel) {
         await GVM.activateBonus(actor, item);
       } else if (control === "start-order-template" && item) {
         await GVM.startOrderTemplate(actor, item);
+      } else if (control === "create-resident-ability") {
+        const residentCard = element.closest("[data-resident-id]");
+        if (residentCard) GVM.openAbilityBuilder(actor, { sourceType: "resident", residentId: residentCard.dataset.residentId });
       } else if (control === "configure-resident") {
         const residentCard = element.closest("[data-resident-id]");
         if (residentCard) GVM.openResidentConfig(actor, residentCard.dataset.residentId);

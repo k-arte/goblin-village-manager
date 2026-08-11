@@ -1332,3 +1332,77 @@
   opacity: 0.55;
   cursor: not-allowed;
 }
+
+/* v0.7 stage 3: ability builder */
+.gvm-builder-hero {
+  border: 1px solid rgba(230, 220, 200, 0.18);
+  border-radius: 9px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--gvm-accent, #c9593f) 12%, transparent), transparent 40%),
+    rgba(0, 0, 0, 0.18);
+}
+
+.gvm-builder-hero h2 {
+  margin: 0;
+  color: var(--gvm-accent-strong, #f0d28b);
+}
+
+.gvm-builder-hero p,
+.gvm-builder-note {
+  color: #9ba7b8;
+}
+
+.gvm-ability-reward-drop {
+  border: 1px dashed rgba(230, 220, 200, 0.32);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.18);
+  margin: 8px 0;
+}
+
+.gvm-ability-reward-drop.dragover {
+  outline: 2px dashed var(--gvm-accent, #c9593f);
+  background: color-mix(in srgb, var(--gvm-accent, #c9593f) 14%, transparent);
+}
+
+.gvm-ability-reward-drop strong {
+  color: var(--gvm-accent-strong, #f0d28b);
+}
+
+.gvm-ability-reward-drop p {
+  margin: 4px 0 0;
+  color: #9ba7b8;
+}
+
+.gvm-ability-builder-preview {
+  border: 1px solid var(--gvm-accent, #c9593f);
+  border-radius: 8px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--gvm-accent, #c9593f) 14%, transparent), transparent 35%),
+    rgba(0, 0, 0, 0.22);
+}
+
+.gvm-ability-builder-preview strong {
+  display: block;
+  color: var(--gvm-accent-strong, #f0d28b);
+}
+
+.gvm-ability-builder-preview span {
+  display: block;
+  color: #9ba7b8;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.gvm-ability-builder-preview p {
+  margin: 6px 0 0;
+  color: #c9c0b8;
+}
+
+.gvm-mini-button.primary {
+  color: var(--gvm-accent-strong, #f0d28b);
+  border-color: color-mix(in srgb, var(--gvm-accent, #c9593f) 52%, transparent);
+}
