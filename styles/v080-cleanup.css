@@ -1,0 +1,172 @@
+/**
+ * GVM v0.8 Final UI Cleanup
+ */
+
+/* Strong dark styling for any GVM dialog/window */
+.gvm-v080-window .window-content,
+.dialog.gvm-v080-window .window-content,
+.window-app.gvm-v080-window .window-content {
+  background:
+    radial-gradient(circle at top left, rgba(255, 207, 128, 0.13), transparent 36%),
+    linear-gradient(145deg, #10141b 0%, #06080d 100%) !important;
+  color: #f6ead4 !important;
+}
+
+.gvm-v080-window .window-content,
+.gvm-v080-window .window-content * {
+  color-scheme: dark;
+}
+
+.gvm-v080-window .window-content p,
+.gvm-v080-window .window-content span,
+.gvm-v080-window .window-content label,
+.gvm-v080-window .window-content div,
+.gvm-v080-window .window-content li {
+  color: rgba(255, 239, 213, 0.86);
+}
+
+.gvm-v080-window .window-content h1,
+.gvm-v080-window .window-content h2,
+.gvm-v080-window .window-content h3,
+.gvm-v080-window .window-content h4,
+.gvm-v080-window .window-content strong {
+  color: #ffdfa5;
+}
+
+.gvm-v080-window .window-content input,
+.gvm-v080-window .window-content select,
+.gvm-v080-window .window-content textarea {
+  background: rgba(5, 7, 11, 0.96) !important;
+  color: #fff1d8 !important;
+  border: 1px solid rgba(215, 166, 92, 0.55) !important;
+  border-radius: 8px;
+}
+
+.gvm-v080-window .window-content option {
+  color: #15110a !important;
+  background: #f4ead7 !important;
+}
+
+/* Hide debug and legacy noise */
+.gvm-v080-hidden-debug,
+.gvm-v080-hidden-legacy-section,
+.gvm-v080-hidden-legacy {
+  display: none !important;
+}
+
+.gvm-v080-debug-visible .gvm-v080-hidden-debug,
+.gvm-v080-legacy-visible .gvm-v080-hidden-legacy-section,
+.gvm-v080-legacy-visible .gvm-v080-hidden-legacy {
+  display: revert !important;
+}
+
+/* Readability baseline */
+.gvm-bastion-board,
+.gvm-settlement-board,
+.gvm-root {
+  font-size: 14px !important;
+  line-height: 1.42;
+}
+
+.gvm-bastion-board p,
+.gvm-settlement-board p,
+.gvm-root p {
+  line-height: 1.45;
+}
+
+.gvm-bastion-board small,
+.gvm-settlement-board small,
+.gvm-root small,
+.gvm-v080-secondary-text {
+  font-size: 12px !important;
+  line-height: 1.35;
+  color: rgba(255, 239, 213, 0.66) !important;
+}
+
+/* Cleaner cards */
+.gvm-v080-clean-card {
+  color: #f6ead4;
+}
+
+.gvm-v080-clean-card h1,
+.gvm-v080-clean-card h2,
+.gvm-v080-clean-card h3,
+.gvm-v080-clean-card h4,
+.gvm-v080-clean-card strong {
+  color: #ffdfa5;
+}
+
+.gvm-v080-clean-card p,
+.gvm-v080-clean-card span,
+.gvm-v080-clean-card small {
+  color: rgba(255, 239, 213, 0.78);
+}
+
+.gvm-v080-clean-card button,
+.gvm-v080-button {
+  min-height: 29px;
+  border-radius: 8px;
+  border: 1px solid rgba(215, 166, 92, 0.3);
+  background: rgba(255, 211, 134, 0.08);
+  color: #ffdfa5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Empty states */
+.gvm-v080-empty-state {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(215, 166, 92, 0.25);
+  background: rgba(0, 0, 0, 0.14);
+  color: rgba(255, 239, 213, 0.66) !important;
+}
+
+/* Compact mode */
+.gvm-v080-compact .gvm-v080-overview-panel,
+.gvm-v080-compact .gvm-v080-settings-section,
+.gvm-v080-compact .gvm-abilities-section,
+.gvm-v080-compact .gvm-v080-clean-card {
+  padding: 8px !important;
+}
+
+.gvm-v080-compact .gvm-v080-nav {
+  gap: 5px;
+  padding: 6px;
+}
+
+.gvm-v080-compact .gvm-v080-nav-button {
+  min-height: 30px;
+  padding: 5px 8px;
+}
+
+/* Avoid ultra tiny action text */
+.gvm-mini-button,
+.gvm-control,
+.gvm-v080-button,
+button[data-gvm-v080-control],
+button[data-gvm-v080-ability-action] {
+  font-size: 12px !important;
+  line-height: 1.2;
+}
+
+/* Better focus */
+.gvm-v080-window input:focus,
+.gvm-v080-window select:focus,
+.gvm-v080-window textarea:focus,
+.gvm-bastion-board button:focus,
+.gvm-settlement-board button:focus,
+.gvm-root button:focus {
+  outline: 2px solid rgba(255, 215, 145, 0.45);
+  outline-offset: 1px;
+}
+
+/* Safety: old white dialog text fix */
+.dialog .window-content .gvm-dialog,
+.dialog .window-content .gvm-config-form,
+.dialog .window-content .gvm-ability-builder-form,
+.dialog .window-content .gvm-v080-settings-form,
+.dialog .window-content .gvm-v080-ability-manager,
+.dialog .window-content .gvm-v080-ability-editor {
+  color: #f6ead4 !important;
+}

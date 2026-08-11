@@ -63,13 +63,13 @@ GVM.renderInlineDrawer = function renderInlineDrawer(actor, item) {
           </section>
 
           <section class="gvm-drawer-group">
-            <h4>Малые приказы ${minorOrders.length}/${minorCapacity}</h4>
+            <h4>Личные приказы ${minorOrders.length}/${minorCapacity}</h4>
             ${minorOrders.length ? minorOrders.map(order => `
               <div class="gvm-drawer-minor-order">
                 <span>${GVM.escapeHtml(order.label)}</span>
                 <small>${Number(order.progress || 0)}/${Number(order.duration || 1)}</small>
               </div>
-            `).join("") : `<p class="gvm-drawer-empty">Активных малых приказов нет.</p>`}
+            `).join("") : `<p class="gvm-drawer-empty">Активных личных приказов нет.</p>`}
           </section>
 
           <section class="gvm-drawer-group">

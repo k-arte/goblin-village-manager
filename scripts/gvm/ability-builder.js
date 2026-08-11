@@ -10,9 +10,9 @@ GVM.ABILITY_PRESETS = {
     resultType: "manual"
   },
   minorOrder: {
-    label: "Малый приказ здания",
-    abilityLabel: "Новый малый приказ",
-    description: "Действие занимает малый приказ здания.",
+    label: "Личный приказ",
+    abilityLabel: "Новый личный приказ",
+    description: "Действие занимает личный приказ.",
     actionType: "minor",
     costStat: "treasury",
     costValue: 0,
@@ -181,7 +181,7 @@ GVM.openAbilityBuilder = function openAbilityBuilder(actor, context = {}) {
               <span>Тип действия</span>
               <select name="actionType">
                 <option value="instant">Мгновенно</option>
-                <option value="minor">Малый приказ</option>
+                <option value="minor">Личный приказ</option>
                 <option value="city">Городской приказ</option>
               </select>
             </label>

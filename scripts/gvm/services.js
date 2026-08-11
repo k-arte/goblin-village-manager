@@ -116,7 +116,7 @@ GVM.startMinorOrder = async function startMinorOrder(actor, item, service) {
   const capacity = GVM.getMinorOrderCapacity(item);
 
   if (data.activeMinorOrders.length >= capacity) {
-    ui.notifications.warn(`Лимит малых приказов здания достигнут: ${data.activeMinorOrders.length}/${capacity}.`);
+    ui.notifications.warn(`Лимит личных приказов здания достигнут: ${data.activeMinorOrders.length}/${capacity}.`);
     return;
   }
 
@@ -125,7 +125,7 @@ GVM.startMinorOrder = async function startMinorOrder(actor, item, service) {
 
   data.activeMinorOrders.push({
     id: foundry.utils.randomID(),
-    label: service.label || "Малый приказ",
+    label: service.label || "Личный приказ",
     serviceId: service.id || null,
     progress: 0,
     duration: Math.max(1, Number(service.duration || 1)),
@@ -139,7 +139,7 @@ GVM.startMinorOrder = async function startMinorOrder(actor, item, service) {
   if (GVM.addJournalEntry) {
     await GVM.addJournalEntry(actor, {
       type: "order",
-      title: `Малый приказ: ${service.label}`,
+      title: `Личный приказ: ${service.label}`,
       entries: [
         `Здание: ${item.name}.`,
         `Длительность: ${Math.max(1, Number(service.duration || 1))} цикл(а).`
@@ -147,7 +147,7 @@ GVM.startMinorOrder = async function startMinorOrder(actor, item, service) {
     });
   }
 
-  ui.notifications.info(`Малый приказ создан: ${service.label}.`);
+  ui.notifications.info(`Личный приказ создан: ${service.label}.`);
   GVM.queueRefresh(actor);
 };
 

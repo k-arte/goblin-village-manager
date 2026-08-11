@@ -1,0 +1,96 @@
+/**
+ * GVM v0.8 Visual + Content Adaptation
+ */
+
+.gvm-v080-building-art-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.gvm-v080-building-art-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(135deg, rgba(2, 4, 8, 0.88), rgba(2, 4, 8, 0.52)),
+    var(--gvm-v080-building-art);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.92;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gvm-v080-building-art-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.gvm-v080-building-thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 214, 145, 0.42);
+  background: #080b10;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+  margin-right: 8px;
+}
+
+.gvm-v080-resident-portrait-card {
+  position: relative;
+}
+
+.gvm-v080-resident-portrait-box {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  margin-right: 10px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 214, 145, 0.42);
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.gvm-v080-resident-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gvm-v080-settings-entry [data-gvm-v080-control='adapt-buildings'] {
+  border-color: rgba(120, 180, 255, 0.42);
+  background: rgba(120, 180, 255, 0.1);
+  color: #bcd8ff;
+}
+
+.gvm-v080-building-art-card .gvm-v080-card-tools,
+.gvm-v080-resident-portrait-card .gvm-v080-card-tools {
+  position: relative;
+  z-index: 2;
+}
+
+/* Extra hardening against unreadable text */
+.gvm-v080-window .window-content,
+.gvm-v080-window .window-content p,
+.gvm-v080-window .window-content span,
+.gvm-v080-window .window-content label,
+.gvm-v080-window .window-content div {
+  color: inherit;
+}
+
+.gvm-v080-window .window-content input,
+.gvm-v080-window .window-content select,
+.gvm-v080-window .window-content textarea {
+  color: #fff1d8 !important;
+  background: rgba(5, 7, 11, 0.94) !important;
+}
+
+.gvm-v080-window .window-content option {
+  color: #111 !important;
+  background: #f4ead7 !important;
+}

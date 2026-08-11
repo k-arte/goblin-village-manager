@@ -1,0 +1,107 @@
+/**
+ * GVM v0.8 Ability and Service Management
+ */
+
+.gvm-v080-card-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.gvm-v080-ability-manager,
+.gvm-v080-ability-editor {
+  color: #f6ead4;
+  font-size: 14px;
+}
+
+.gvm-v080-ability-list {
+  display: grid;
+  gap: 9px;
+}
+
+.gvm-v080-ability-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 11px;
+  border-radius: 13px;
+  border: 1px solid rgba(215, 166, 92, 0.24);
+  background:
+    radial-gradient(circle at top left, rgba(255, 210, 130, 0.08), transparent 38%),
+    rgba(5, 7, 11, 0.62);
+}
+
+.gvm-v080-ability-main {
+  min-width: 0;
+}
+
+.gvm-v080-ability-main strong {
+  display: block;
+  color: #ffdfa5;
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.gvm-v080-ability-main span {
+  display: block;
+  color: rgba(255, 239, 213, 0.72);
+  font-size: 12px;
+}
+
+.gvm-v080-ability-main p {
+  margin: 5px 0 0 0;
+  color: rgba(255, 239, 213, 0.66);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.gvm-v080-ability-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.gvm-v080-ability-actions button,
+.gvm-v080-ability-manager button,
+.gvm-v080-ability-editor button {
+  min-height: 29px;
+  border-radius: 8px;
+  border: 1px solid rgba(215, 166, 92, 0.3);
+  background: rgba(255, 211, 134, 0.08);
+  color: #ffdfa5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.gvm-v080-ability-actions button[data-gvm-v080-ability-action="delete"] {
+  border-color: rgba(220, 80, 70, 0.42);
+  background: rgba(220, 80, 70, 0.12);
+  color: #ff9a85;
+}
+
+.gvm-v080-empty {
+  margin: 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(215, 166, 92, 0.25);
+  color: rgba(255, 239, 213, 0.62);
+  font-size: 13px;
+}
+
+.gvm-v080-ability-editor textarea {
+  min-height: 90px;
+}
+
+@media (max-width: 780px) {
+  .gvm-v080-ability-row {
+    grid-template-columns: 1fr;
+  }
+
+  .gvm-v080-ability-actions {
+    justify-content: flex-start;
+  }
+}

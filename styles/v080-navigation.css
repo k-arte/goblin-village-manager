@@ -1,0 +1,160 @@
+/**
+ * GVM v0.8 Navigation Layer
+ */
+
+.gvm-v080-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+  padding: 8px;
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 145, 0.08), rgba(0, 0, 0, 0.16));
+  border: 1px solid rgba(215, 166, 92, 0.24);
+}
+
+.gvm-v080-nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 7px 11px;
+  border-radius: 10px;
+  border: 1px solid rgba(215, 166, 92, 0.24);
+  background: rgba(6, 8, 12, 0.72);
+  color: rgba(255, 238, 210, 0.78);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.gvm-v080-nav-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 209, 128, 0.11);
+  color: #ffe2aa;
+  border-color: rgba(255, 209, 128, 0.45);
+}
+
+.gvm-v080-nav-button.active {
+  color: #1b1206;
+  background: linear-gradient(135deg, #ffd992, #b98237);
+  border-color: rgba(255, 230, 170, 0.72);
+  box-shadow:
+    0 0 0 1px rgba(255, 239, 205, 0.18) inset,
+    0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.gvm-v080-nav-button.active i,
+.gvm-v080-nav-button.active span {
+  color: #1b1206;
+}
+
+.gvm-v080-tab-hidden {
+  display: none !important;
+}
+
+.gvm-v080-overview-panel {
+  margin: 12px 0;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(215, 166, 92, 0.26);
+  background:
+    radial-gradient(circle at top left, rgba(255, 210, 130, 0.12), transparent 36%),
+    rgba(0, 0, 0, 0.18);
+}
+
+.gvm-v080-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.gvm-v080-section-header h3 {
+  margin: 0;
+  color: #ffdfa5;
+  font-size: 18px;
+}
+
+.gvm-v080-section-header p {
+  margin: 3px 0 0 0;
+  color: rgba(255, 238, 210, 0.66);
+  font-size: 13px;
+}
+
+.gvm-v080-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.gvm-v080-overview-grid article {
+  min-height: 74px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(6, 8, 12, 0.72);
+  border: 1px solid rgba(215, 166, 92, 0.2);
+  text-align: center;
+}
+
+.gvm-v080-overview-grid article strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #ffd894;
+  font-size: 23px;
+  line-height: 1.1;
+}
+
+.gvm-v080-overview-grid article span {
+  color: rgba(255, 238, 210, 0.72);
+  font-size: 12px;
+  text-transform: lowercase;
+}
+
+.gvm-v080-overview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.gvm-v080-overview-actions button {
+  min-height: 32px;
+}
+
+/* Make tab content feel more native and less like a raw debug dump */
+[data-gvm-v080-section] {
+  animation: gvm-v080-fade-in 120ms ease-out;
+}
+
+@keyframes gvm-v080-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* General readability cleanup */
+.gvm-bastion-board h3,
+.gvm-settlement-board h3,
+.gvm-root h3 {
+  letter-spacing: 0.01em;
+}
+
+.gvm-bastion-board .gvm-empty,
+.gvm-settlement-board .gvm-empty,
+.gvm-root .gvm-empty {
+  color: rgba(255, 238, 210, 0.62);
+  font-size: 13px;
+}

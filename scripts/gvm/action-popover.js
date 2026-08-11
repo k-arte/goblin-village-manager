@@ -69,13 +69,13 @@ GVM.openActionPopover = function openActionPopover(actor, item, anchor = null) {
       </section>
 
       <section class="gvm-popover-group">
-        <h4>Малые приказы ${minorOrders.length}/${capacity}</h4>
+        <h4>Личные приказы ${minorOrders.length}/${capacity}</h4>
         ${minorOrders.length ? minorOrders.map(order => `
           <div class="gvm-popover-minor-order">
             <span>${GVM.escapeHtml(order.label)}</span>
             <small>${Number(order.progress || 0)}/${Number(order.duration || 1)}</small>
           </div>
-        `).join("") : `<p class="gvm-popover-empty">Активных малых приказов нет.</p>`}
+        `).join("") : `<p class="gvm-popover-empty">Активных личных приказов нет.</p>`}
       </section>
 
       <section class="gvm-popover-group">
