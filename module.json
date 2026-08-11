@@ -26,6 +26,7 @@
     "scripts/gvm/config-apps.js",
     "scripts/gvm/bonus-rewards.js",
     "scripts/gvm/build-flow.js",
+    "scripts/gvm/attack-engine.js",
     "scripts/gvm/ui.js",
     "scripts/main.js"
   ],
