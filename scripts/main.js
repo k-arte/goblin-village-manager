@@ -644,6 +644,15 @@
     return foundry.utils.deepClone(x);
   }
 
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
   function isGM() {
     return game.user?.isGM;
   }
@@ -884,11 +893,7 @@
       type: "loot",
       img: img || "icons/svg/item-bag.svg",
       system: {},
-      flags: {
-        {
-          data
-        }
-      }
+      flags: { [FLAG_SCOPE]: { data } }
     };
     const created = await actor.createEmbeddedDocuments("Item", [itemData]);
     return created?.[0];
@@ -911,7 +916,7 @@
         type: "loot",
         img: b.img,
         system: {},
-        flags: { { data: clone(b.data) } }
+        flags: { [FLAG_SCOPE]: { data: clone(b.data) } }
       });
     }
 
@@ -921,7 +926,7 @@
         type: "loot",
         img: r.img,
         system: {},
-        flags: { { data: clone(r.data) } }
+        flags: { [FLAG_SCOPE]: { data: clone(r.data) } }
       });
     }
 
@@ -931,7 +936,7 @@
         type: "loot",
         img: b.img,
         system: {},
-        flags: { { data: clone(b.data) } }
+        flags: { [FLAG_SCOPE]: { data: clone(b.data) } }
       });
     }
 
@@ -1335,7 +1340,7 @@
       content: `
         <form>
           <p>Редактируйте JSON flags.${FLAG_SCOPE}.data. Осторожно: невалидный JSON не сохранится.</p>
-          <textarea name="json" style="width:100%;height:420px;font-family:monospace;">${foundry.utils.escapeHTML(JSON.stringify(data, null, 2))}</textarea>
+          <textarea name="json" style="width:100%;height:420px;font-family:monospace;">${escapeHtml(JSON.stringify(data, null, 2))}</textarea>
         </form>
       `,
       buttons: {
