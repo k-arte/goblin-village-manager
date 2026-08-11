@@ -93,7 +93,7 @@ GVM.activateAbilitiesSection = function activateAbilitiesSection(actor, root) {
       if (!card) return;
 
       await GVM.executeAbility(actor, card.dataset.gvmAbilityId);
-      GVM.refreshSettlement(actor);
+      GVM.queueRefresh(actor);
     });
   });
 };

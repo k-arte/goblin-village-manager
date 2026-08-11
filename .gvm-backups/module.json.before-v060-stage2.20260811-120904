@@ -1,0 +1,39 @@
+{
+  "id": "goblin-village-manager",
+  "title": "Goblin Village Manager",
+  "description": "A Group Actor settlement manager for Foundry VTT D&D campaigns. Buildings, reforms, orders and bonuses are editable Items.",
+  "version": "0.6.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Hiro + M365 Copilot"
+    }
+  ],
+  "scripts": [
+    "scripts/gvm/constants.js",
+    "scripts/gvm/utils.js",
+    "scripts/gvm/data.js",
+    "scripts/gvm/facility-catalog.js",
+    "scripts/gvm/state.js",
+    "scripts/gvm/settlement-journal.js",
+    "scripts/gvm/items.js",
+    "scripts/gvm/cycle.js",
+    "scripts/gvm/render-context.js",
+    "scripts/gvm/dialogs.js",
+    "scripts/gvm/config-apps.js",
+    "scripts/gvm/bonus-rewards.js",
+    "scripts/gvm/ui.js",
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/settlement.css",
+    "styles/bastion-theme.css"
+  ],
+  "languages": [],
+  "packs": [],
+  "manifest": "https://github.com/k-arte/goblin-village-manager/releases/latest/download/module.json",
+  "download": "https://github.com/k-arte/goblin-village-manager/releases/latest/download/module.zip"
+}

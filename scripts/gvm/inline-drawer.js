@@ -131,7 +131,7 @@ GVM.toggleInlineActionDrawer = function toggleInlineActionDrawer(actor, item, ca
         await GVM.executeBuildingService(actor, item, serviceButton.dataset.gvmServiceId);
       }
 
-      GVM.refreshSettlement(actor);
+      GVM.queueRefresh(actor);
       return;
     }
 

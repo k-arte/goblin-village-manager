@@ -108,7 +108,7 @@ GVM.removeResident = async function removeResident(actor, residentId) {
   const after = before.filter(resident => resident.id !== residentId);
 
   await GVM.setKeyResidents(actor, after);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.handleResidentDrop = async function handleResidentDrop(actor, event) {

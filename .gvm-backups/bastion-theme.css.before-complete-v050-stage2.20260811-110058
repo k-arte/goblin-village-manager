@@ -1,0 +1,230 @@
+.gvm-bastion-board {
+  min-height: 100%;
+  padding: 18px;
+  color: #d6d1c8;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.05), transparent 30%),
+    linear-gradient(180deg, rgba(12,13,16,0.96), rgba(8,9,12,0.98));
+  box-sizing: border-box;
+}
+
+.gvm-bastion-title {
+  text-align: center;
+  margin: 4px 0 18px;
+}
+
+.gvm-bastion-title h1 {
+  margin: 0;
+  font-family: serif;
+  font-size: 38px;
+  letter-spacing: 0.04em;
+  color: #e5ddcf;
+  text-transform: uppercase;
+}
+
+.gvm-defenders-strip {
+  border-bottom: 1px solid rgba(230,220,200,0.35);
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+}
+
+.gvm-defenders-strip h3,
+.gvm-column-header h3 {
+  margin: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #bdb6aa;
+}
+
+.gvm-defenders-strip p {
+  text-align: center;
+  font-style: italic;
+  color: #8e887f;
+  margin: 20px 0 0;
+}
+
+.gvm-bastion-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.gvm-column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(230,220,200,0.30);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+}
+
+.gvm-column-header span {
+  color: #c9bfaa;
+  font-weight: 700;
+}
+
+.gvm-facility-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gvm-facility-card {
+  position: relative;
+  min-height: 116px;
+  overflow: hidden;
+  border: 1px solid rgba(210,200,180,0.22);
+  border-radius: 6px;
+  background-image:
+    linear-gradient(90deg, rgba(18,19,25,0.94), rgba(18,19,25,0.55), rgba(18,19,25,0.72)),
+    var(--gvm-card-art);
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.gvm-facility-card:hover {
+  border-color: rgba(230,215,180,0.55);
+  box-shadow:
+    0 0 0 1px rgba(230,215,180,0.20),
+    0 6px 18px rgba(0,0,0,0.35);
+}
+
+.gvm-facility-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), transparent 35%),
+    radial-gradient(circle at right top, rgba(255,255,255,0.08), transparent 40%);
+  pointer-events: none;
+}
+
+.gvm-facility-header,
+.gvm-facility-slots,
+.gvm-facility-boons,
+.gvm-facility-services {
+  position: relative;
+  z-index: 1;
+}
+
+.gvm-facility-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 10px 10px 4px;
+}
+
+.gvm-facility-title-block h4 {
+  margin: 0;
+  color: #e6e0d6;
+  font-size: 15px;
+}
+
+.gvm-facility-title-block span {
+  display: block;
+  color: #b1aaa0;
+  font-size: 12px;
+}
+
+.gvm-facility-action {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(220,210,190,0.35);
+  border-radius: 4px;
+  background: rgba(20,22,28,0.72);
+  color: #cdbf9d;
+  cursor: pointer;
+}
+
+.gvm-facility-action:hover {
+  background: rgba(60,54,42,0.85);
+  color: #f0d28b;
+}
+
+.gvm-facility-slots {
+  display: flex;
+  gap: 4px;
+  padding: 1px 10px 5px;
+}
+
+.gvm-slot {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(220,210,190,0.16);
+  border-radius: 3px;
+  color: rgba(220,220,220,0.25);
+  background: rgba(0,0,0,0.22);
+}
+
+.gvm-slot.filled {
+  color: rgba(230,230,230,0.75);
+  border-color: rgba(220,210,190,0.30);
+}
+
+.gvm-facility-boons {
+  border-top: 1px solid rgba(220,210,190,0.18);
+  padding: 8px 10px 9px;
+  background: rgba(10,10,14,0.34);
+}
+
+.gvm-facility-boons strong {
+  display: block;
+  color: #d8d2c8;
+  font-size: 13px;
+}
+
+.gvm-facility-boons p {
+  margin: 2px 0 0;
+  color: #b2aaa0;
+}
+
+.gvm-facility-boons ul {
+  margin: 4px 0 0;
+  padding-left: 16px;
+}
+
+.gvm-facility-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 10px 10px;
+}
+
+.gvm-facility-services span {
+  font-size: 11px;
+  border: 1px solid rgba(220,210,190,0.18);
+  border-radius: 999px;
+  padding: 2px 6px;
+  background: rgba(0,0,0,0.22);
+  color: #c9c0b8;
+}
+
+.gvm-build-placeholder {
+  height: 48px;
+  border: 1px dashed rgba(220,210,190,0.38);
+  border-radius: 6px;
+  background: rgba(0,0,0,0.18);
+  color: #a89f91;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gvm-build-placeholder:hover {
+  color: #e5d5b4;
+  border-color: rgba(230,215,180,0.68);
+}
+
+.gvm-drop-zone.dragover {
+  outline: 2px dashed #d7bb78;
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .gvm-bastion-columns {
+    grid-template-columns: 1fr;
+  }
+}

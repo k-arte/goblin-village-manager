@@ -341,7 +341,7 @@ GVM.assignWorkers = async function assignWorkersWithResidentSlots(actor, item) {
         callback: async html => {
           data.workersAssigned = Math.max(0, Math.min(maxCommon, Number(html.find("[name=workers]").val()) || 0));
           await item.setFlag(GVM.FLAG_SCOPE, "data", data);
-          GVM.refreshSettlement(actor);
+          GVM.queueRefresh(actor);
         }
       },
       cancel: {

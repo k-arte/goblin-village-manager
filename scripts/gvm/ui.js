@@ -447,7 +447,7 @@ GVM.renameSettlement = function renameSettlement(actor) {
           const name = String(html.find("[name=name]").val() || "").trim();
           if (!name) return;
           await actor.update({ name });
-          GVM.refreshSettlement(actor);
+          GVM.queueRefresh(actor);
         }
       }
     }
@@ -486,7 +486,7 @@ GVM.activatePanel = function activatePanel(actor, panel) {
         const settings = GVM.getSettings(actor);
         settings.hiddenFromPlayers = !settings.hiddenFromPlayers;
         await GVM.setSettings(actor, settings);
-        GVM.refreshSettlement(actor);
+        GVM.queueRefresh(actor);
       } else if (control === "rename-settlement") {
         GVM.renameSettlement(actor);
       } else if (control === "create-building") {
@@ -521,7 +521,7 @@ GVM.activatePanel = function activatePanel(actor, panel) {
         const key = element.dataset.gvmSectionKey;
         const collapsed = GVM.sectionIsCollapsed(actor, key);
         GVM.setSectionCollapsed(actor, key, !collapsed);
-        GVM.refreshSettlement(actor);
+        GVM.queueRefresh(actor);
       }
     });
   });

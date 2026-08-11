@@ -231,7 +231,7 @@ GVM.executeAbility = async function executeAbilityV07(actor, abilityId) {
     });
   }
 
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.originalStartMinorOrderV07 = GVM.originalStartMinorOrderV07 || GVM.startMinorOrder;
@@ -273,7 +273,7 @@ GVM.startMinorOrder = async function startMinorOrderV07(actor, item, service) {
   }
 
   ui.notifications.info(`Малый приказ создан: ${service.label}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.processMinorOrders = async function processMinorOrders(actor) {
@@ -320,5 +320,5 @@ GVM.advanceCycle = async function advanceCycleWithEffectsV07(actor) {
   await GVM.tickSettlementActiveEffects(actor);
   GVM.reportActiveSettlementEffects(actor);
 
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };

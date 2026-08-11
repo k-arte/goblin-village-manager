@@ -228,5 +228,5 @@ GVM.saveResidentConfig = async function saveResidentConfig(actor, residentId, ht
   await GVM.setKeyResidents(actor, residents);
 
   ui.notifications.info("Ключевой житель сохранён.");
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };

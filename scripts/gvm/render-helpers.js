@@ -64,7 +64,7 @@ GVM.renameSettlement = function renameSettlement(actor) {
           const name = String(html.find("[name=name]").val() || "").trim();
           if (!name) return;
           await GVM.setSettlementName(actor, name);
-          GVM.refreshSettlement(actor);
+          GVM.queueRefresh(actor);
         }
       }
     }
@@ -95,7 +95,7 @@ GVM.confirmDeleteGvmItem = function confirmDeleteGvmItem(actor, item) {
             });
           }
 
-          GVM.refreshSettlement(actor);
+          GVM.queueRefresh(actor);
         }
       },
       cancel: {

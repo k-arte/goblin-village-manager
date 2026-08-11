@@ -52,7 +52,7 @@ GVM.cancelOrder = async function cancelOrder(actor, item) {
   }
 
   ui.notifications.info(`Приказ отменён: ${item.name}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.estimateBuildingTotalCost = function estimateBuildingTotalCost(item) {

@@ -38,6 +38,7 @@
     "scripts/gvm/inline-drawer.js",
     "scripts/gvm/services.js",
     "scripts/gvm/resident-effects.js",
+    "scripts/gvm/derived-pipeline.js",
     "scripts/gvm/journal-ui.js",
     "scripts/gvm/ability-model.js",
     "scripts/gvm/ability-ui.js",

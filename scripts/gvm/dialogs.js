@@ -108,7 +108,7 @@ GVM.assignWorkers = async function assignWorkers(actor, item) {
         callback: async html => {
           data.workersAssigned = Math.max(0, Math.min(max, Number(html.find("[name=workers]").val()) || 0));
           await item.setFlag(GVM.FLAG_SCOPE, "data", data);
-          GVM.refreshSettlement(actor);
+          GVM.queueRefresh(actor);
         }
       },
       cancel: {
@@ -129,14 +129,14 @@ GVM.toggleBuilding = async function toggleBuilding(actor, item) {
   }
 
   await item.setFlag(GVM.FLAG_SCOPE, "data", data);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.toggleReform = async function toggleReform(actor, item) {
   const data = GVM.clone(GVM.gvmData(item));
   data.active = !data.active;
   await item.setFlag(GVM.FLAG_SCOPE, "data", data);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.activateBonus = async function activateBonus(actor, item) {
@@ -146,7 +146,7 @@ GVM.activateBonus = async function activateBonus(actor, item) {
     data.active = false;
     data.remaining = 0;
     await item.setFlag(GVM.FLAG_SCOPE, "data", data);
-    GVM.refreshSettlement(actor);
+    GVM.queueRefresh(actor);
     return;
   }
 
@@ -168,7 +168,7 @@ GVM.activateBonus = async function activateBonus(actor, item) {
   data.remaining = Number(data.duration || 1);
 
   await item.setFlag(GVM.FLAG_SCOPE, "data", data);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.editGvmData = function editGvmData(actor, item) {
@@ -188,7 +188,7 @@ GVM.editGvmData = function editGvmData(actor, item) {
           try {
             const parsed = JSON.parse(html.find("[name=json]").val());
             await item.setFlag(GVM.FLAG_SCOPE, "data", parsed);
-            GVM.refreshSettlement(actor);
+            GVM.queueRefresh(actor);
           } catch (err) {
             ui.notifications.error(`JSON ошибка: ${err.message}`);
           }
@@ -405,7 +405,7 @@ GVM.createBuildingDialog = function createBuildingDialog(actor) {
             note
           }, { description: note });
 
-          GVM.refreshSettlement(actor);
+          GVM.queueRefresh(actor);
         }
       },
       cancel: {
@@ -453,7 +453,7 @@ GVM.createReformDialog = function createReformDialog(actor) {
             effects
           }, { description });
 
-          GVM.refreshSettlement(actor);
+          GVM.queueRefresh(actor);
         }
       },
       cancel: {
@@ -542,7 +542,7 @@ GVM.createBonusDialog = function createBonusDialog(actor) {
             description
           }, { description });
 
-          GVM.refreshSettlement(actor);
+          GVM.queueRefresh(actor);
         }
       },
       cancel: {

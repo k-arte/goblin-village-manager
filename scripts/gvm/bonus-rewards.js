@@ -116,5 +116,5 @@ GVM.activateBonus = async function activateBonus(actor, item) {
   });
 
   ui.notifications.info(`Бонус активирован: ${rewardDocument.name} добавлен в ${actor.name}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };

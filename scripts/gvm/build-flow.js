@@ -216,7 +216,7 @@ GVM.startBuildFacilityProject = async function startBuildFacilityProject(actor, 
   });
 
   ui.notifications.info(`Начато строительство: ${template.name}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 
   return building;
 };
@@ -257,7 +257,7 @@ GVM.demolishBuilding = async function demolishBuilding(actor, item, mode = "dest
     ]);
 
     ui.notifications.info(`Здание удалено: ${name}.`);
-    GVM.refreshSettlement(actor);
+    GVM.queueRefresh(actor);
     return;
   }
 
@@ -282,7 +282,7 @@ GVM.demolishBuilding = async function demolishBuilding(actor, item, mode = "dest
   });
 
   ui.notifications.info(`Здание снесено: ${item.name}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.confirmDemolishBuilding = function confirmDemolishBuilding(actor, item) {

@@ -71,7 +71,7 @@ GVM.renderSettlementPanel = async function renderSettlementPanelWithJournal(acto
       const key = element.dataset.gvmSectionKey;
       const collapsed = GVM.sectionIsCollapsed(actor, key);
       GVM.setSectionCollapsed(actor, key, !collapsed);
-      GVM.refreshSettlement(actor);
+      GVM.queueRefresh(actor);
     });
   });
 };

@@ -79,7 +79,7 @@ GVM.initializeDefaults = async function initializeDefaults(actor) {
   }
 
   ui.notifications.info("Стартовые Items поселения созданы.");
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.inferBuildingType = function inferBuildingType(item) {
@@ -178,5 +178,5 @@ GVM.handleDrop = async function handleDrop(actor, event, expectedKind) {
 
   await actor.createEmbeddedDocuments("Item", [itemData]);
   ui.notifications.info(`${dropped.name} добавлен в поселение.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };

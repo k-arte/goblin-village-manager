@@ -36,3 +36,34 @@ GVM.addResource = function addResource(resources, stat, value) {
   if (resources[stat] === undefined) resources[stat] = 0;
   resources[stat] += Number(value) || 0;
 };
+
+
+// =================================================
+// Stage 1 Refactor: debounced refresh
+// =================================================
+
+GVM._refreshQueue = GVM._refreshQueue || new Map();
+
+GVM.queueRefresh = function queueRefresh(actor) {
+  if (!actor) return;
+
+  const actorId = actor.id;
+
+  if (GVM._refreshQueue.has(actorId)) {
+    clearTimeout(GVM._refreshQueue.get(actorId));
+  }
+
+  const handle = setTimeout(() => {
+    GVM._refreshQueue.delete(actorId);
+
+    try {
+      GVM.refreshSettlement(actor);
+    } catch (err) {
+      console.error("GVM queueRefresh failed", err);
+    }
+
+  }, 25);
+
+  GVM._refreshQueue.set(actorId, handle);
+};
+

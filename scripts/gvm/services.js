@@ -148,7 +148,7 @@ GVM.startMinorOrder = async function startMinorOrder(actor, item, service) {
   }
 
   ui.notifications.info(`Малый приказ создан: ${service.label}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.executeInstantService = async function executeInstantService(actor, item, service) {
@@ -180,7 +180,7 @@ GVM.executeInstantService = async function executeInstantService(actor, item, se
   });
 
   ui.notifications.info(`Услуга выполнена: ${service.label}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
 
 GVM.executeBuildingService = async function executeBuildingService(actor, item, serviceId) {

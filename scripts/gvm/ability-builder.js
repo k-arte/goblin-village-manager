@@ -457,7 +457,7 @@ GVM.saveAbilityBuilder = async function saveAbilityBuilder(actor, context, html)
     await context.item.setFlag(GVM.FLAG_SCOPE, "data", data);
 
     ui.notifications.info(`Способность добавлена в ${context.item.name}: ${ability.label}`);
-    GVM.refreshSettlement(actor);
+    GVM.queueRefresh(actor);
     return;
   }
 
@@ -476,7 +476,7 @@ GVM.saveAbilityBuilder = async function saveAbilityBuilder(actor, context, html)
     await GVM.setKeyResidents(actor, residents);
 
     ui.notifications.info(`Способность добавлена ключевому жителю: ${ability.label}`);
-    GVM.refreshSettlement(actor);
+    GVM.queueRefresh(actor);
     return;
   }
 

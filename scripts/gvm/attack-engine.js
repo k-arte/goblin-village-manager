@@ -367,5 +367,5 @@ GVM.advanceCycle = async function advanceCycleWithAttacksAndJournal(actor) {
   });
 
   ui.notifications.info(`Поселение пересчитано: цикл ${settings.cycle}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };

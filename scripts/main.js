@@ -43,3 +43,52 @@ Hooks.on("getActorSheetHeaderButtons", (app, buttons) => {
     console.warn(`${GVM.MODULE_ID} | Header button failed`, err);
   }
 });
+
+
+// =====================================================
+// GVM Stage2 Final API
+// =====================================================
+
+Hooks.once("ready", () => {
+
+  console.log("========== GVM Stage2 ==========");
+
+  // freeze final implementations
+
+  GVM.FinalAPI = {
+
+    advanceCycle: GVM.advanceCycle,
+    executeAbility: GVM.executeAbility,
+    completeUpgrade: GVM.completeUpgrade,
+    editGvmData: GVM.editGvmData,
+    itemActionDialog: GVM.itemActionDialog,
+    resolveAttackIfDue: GVM.resolveAttackIfDue
+
+  };
+
+  Object.freeze(GVM.FinalAPI);
+
+  console.log(
+    "advanceCycle =>",
+    GVM.advanceCycle?.name
+  );
+
+  console.log(
+    "executeAbility =>",
+    GVM.executeAbility?.name
+  );
+
+  console.log(
+    "completeUpgrade =>",
+    GVM.completeUpgrade?.name
+  );
+
+  console.log(
+    "itemActionDialog =>",
+    GVM.itemActionDialog?.name
+  );
+
+  console.log("================================");
+
+});
+

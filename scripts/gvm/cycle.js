@@ -168,7 +168,7 @@ GVM.createOrder = async function createOrder(actor, options = {}) {
     description: data.description
   });
 
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
   return created;
 };
 
@@ -423,5 +423,5 @@ GVM.advanceCycle = async function advanceCycle(actor) {
   });
 
   ui.notifications.info(`Поселение пересчитано: цикл ${settings.cycle}.`);
-  GVM.refreshSettlement(actor);
+  GVM.queueRefresh(actor);
 };
