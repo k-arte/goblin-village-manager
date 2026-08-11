@@ -1,0 +1,7 @@
+.gvm-root { padding: 12px; }
+.gvm-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #7776; margin-bottom: 8px; }
+.gvm-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+.gvm-tabs button.active { font-weight: bold; box-shadow: 0 0 0 2px #a77 inset; }
+.gvm-panel, .gvm-cards article { border: 1px solid #7776; border-radius: 10px; padding: 10px; margin: 8px 0; background: rgba(0,0,0,0.04); }
+.gvm-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.gvm-cards b { font-size: 24px; }
