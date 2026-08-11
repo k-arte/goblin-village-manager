@@ -1,41 +1,30 @@
 # Changelog
 
-## 0.1.0
-
-Initial working module version.
+## 0.3.0
 
 ### Added
 
-- Settlement sheet window.
-- Actor sheet header button: "Поселение".
-- Global settlement state stored in world settings.
-- Overview tab with settlement resources.
-- Buildings tab.
-- Projects tab.
-- Reforms tab.
-- Bastion bonus tab.
-- Scouting tab.
-- Reports tab.
-- GM tab.
-- Manual cycle advancement.
-- Hidden data toggle for players.
-- Threat growth.
-- Scouting forecast.
-- Basic migration.
-- Basic crisis/attack resolution.
-- Basic building upgrades as projects.
-- Upgrade preview dialog.
-- Basic worker assignment validation.
-- Active project limit from Senate level.
-- Basic active reforms with interval.
-- One active bastion bonus limit.
-- First player-service building example: Smithy.
+- Group Actor settlement tab.
+- Item-based buildings, reforms, orders and bonuses.
+- Settlement data stored on Group Actor flags.
+- Drag-and-drop GVM Items into settlement sections.
+- Native Item Sheet opening from settlement cards.
+- JSON editor for GVM Item data.
+- Create Building, Reform, Order and Bonus buttons.
+- Default Goblin Village item initialization.
+- Senate-based active project capacity.
+- Building upgrades as Order Items.
+- Player services stored on building Items.
+- Scrollable settlement tab.
+- One active bastion bonus rule.
+
+### Changed
+
+- Settlement tab no longer appears on normal player character actors.
+- Cycle engine now reads Actor Items instead of hardcoded state arrays.
 
 ### Known Issues
 
-- Actor sheet button may not appear on some newer AppV2 actor sheets.
-- Reforms still need a full custom multi-effect builder.
-- Orders are mostly hardcoded.
-- Buildings are not yet Item/Compendium based.
-- Building creation and modification UI are not implemented yet.
-- Building target modifiers are not implemented yet.
+- Compendium pack generation is not automated yet.
+- Custom Item Sheets are planned, but not included.
+- Effect editor is minimal and will be expanded.
