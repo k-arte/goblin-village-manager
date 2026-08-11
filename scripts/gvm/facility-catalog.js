@@ -384,7 +384,7 @@ GVM.getFacilityCatalog = function getFacilityCatalog() {
       defaultStarting: false,
       description: "Кузня даёт поселению ремонт, ремесло, вооружение и позднее крафт брони.",
       requirements: [
-        { type: GVM.REQUIREMENT_TYPES.NPC, value: "smith", label: "Кузнец или мастер-ремесленник" }
+        { type: "profession", value: "smith", label: "Кузнец или мастер-ремесленник" }
       ],
       levels: [
         {
@@ -484,7 +484,7 @@ GVM.getFacilityCatalog = function getFacilityCatalog() {
       description: "Сильная редкая постройка для магических предметов и временных зачарований.",
       requirements: [
         { type: GVM.REQUIREMENT_TYPES.LEVEL, value: 9, label: "Уровень партии 9+" },
-        { type: GVM.REQUIREMENT_TYPES.NPC, value: "artificer", label: "Артифисер" }
+        { type: "profession", value: "artificer", label: "Артифисер" }
       ],
       levels: [
         {

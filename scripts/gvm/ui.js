@@ -501,7 +501,7 @@ GVM.activatePanel = function activatePanel(actor, panel) {
       } else if (control === "create-bonus") {
         GVM.createBonusDialog(actor);
       } else if (control === "facility-actions" && item) {
-        GVM.itemActionDialog(actor, item);
+        GVM.openActionPopover ? GVM.openActionPopover(actor, item, element || event.currentTarget) : GVM.itemActionDialog(actor, item);
       } else if (control === "configure-item" && item) {
         GVM.openConfigForItem(actor, item);
       } else if (control === "activate-bonus" && item) {
@@ -528,7 +528,7 @@ GVM.activatePanel = function activatePanel(actor, panel) {
       if (event.target.closest("[data-gvm-control]")) return;
 
       const item = actor.items.get(card.dataset.itemId);
-      if (item && card.classList.contains("gvm-facility-card")) GVM.itemActionDialog(actor, item);
+      if (item && card.classList.contains("gvm-facility-card")) GVM.openActionPopover ? GVM.openActionPopover(actor, item, card) : GVM.itemActionDialog(actor, item);
       else if (item) GVM.openConfigForItem(actor, item);
     });
 

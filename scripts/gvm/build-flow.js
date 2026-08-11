@@ -90,7 +90,8 @@ GVM.renderRequirementList = function renderRequirementList(status) {
 
 GVM.renderBuildFacilityCandidate = function renderBuildFacilityCandidate(actor, template) {
   const level = GVM.firstLevelOfTemplate(template);
-  const requirementStatus = GVM.getRequirementStatus(actor, template.requirements || []);
+  const requirementStatus = GVM.getRequirementStatus(actor, template.buildRequirements || []);
+  const operationRequirementStatus = GVM.getRequirementStatus(actor, template.operationRequirements || template.requirements || []);
 
   const cost = GVM.effectsLabel(level.cost || []);
   const effects = GVM.effectsLabel(level.effects || []);
@@ -105,7 +106,7 @@ GVM.renderBuildFacilityCandidate = function renderBuildFacilityCandidate(actor, 
           <span>${template.category === GVM.FACILITY_CATEGORY.SPECIAL ? "Особая постройка" : "Обычная постройка"} · ${GVM.escapeHtml(GVM.BUILDING_TYPES[template.type] || template.type || "Постройка")}</span>
         </div>
         <button type="button" class="gvm-control primary" data-gvm-build-template="${GVM.escapeHtml(template.id)}">
-          ${requirementStatus.allMet ? "Построить" : "Построить как GM"}
+          Построить
         </button>
       </header>
 
@@ -120,7 +121,7 @@ GVM.renderBuildFacilityCandidate = function renderBuildFacilityCandidate(actor, 
         <div><strong>Сервисы</strong><span>${GVM.escapeHtml(services)}</span></div>
       </div>
 
-      ${GVM.renderRequirementList(requirementStatus)}
+      <div class="gvm-build-operation-req"><strong>Для работы здания:</strong>${GVM.renderRequirementList(operationRequirementStatus)}</div>${template.buildRequirements?.length ? GVM.renderRequirementList(requirementStatus) : ""}
     </article>
   `;
 };
@@ -172,7 +173,8 @@ GVM.startBuildFacilityProject = async function startBuildFacilityProject(actor, 
   await GVM.ensureSettlement(actor);
 
   const firstLevel = GVM.firstLevelOfTemplate(template);
-  const requirementStatus = GVM.getRequirementStatus(actor, template.requirements || []);
+  const requirementStatus = GVM.getRequirementStatus(actor, template.buildRequirements || []);
+  const operationRequirementStatus = GVM.getRequirementStatus(actor, template.operationRequirements || template.requirements || []);
 
   if (!requirementStatus.allMet) {
     ui.notifications.warn("Не все условия выполнены. GM всё равно может начать строительство.");

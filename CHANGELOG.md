@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.6.2
+
+### Added
+
+- D&D theme accent synchronization for settlement UI.
+- Key Residents section.
+- Drag-and-drop Actor support for key residents.
+- Resident configuration dialog.
+- Resident worker slots for buildings.
+- Operation requirements for buildings.
+- Resident salaries and modifier foundation.
+- Building and resident services foundation.
+- Dark action popover for building actions.
+- Minor order foundation for building-specific work.
+
+### Changed
+
+- Boons are no longer displayed directly on facility cards.
+- Facility operation can be blocked by missing professions, assigned specialists, Items, resources or story flags without blocking construction.
+- Key resident worker slots use the D&D sheet accent color.
+
+### Notes
+
+- Full active effects on player Actors are planned for a later version.
+
+
 ## 0.6.0
 
 ### Added

@@ -32,6 +32,10 @@
     "scripts/gvm/attack-engine.js",
     "scripts/gvm/ui.js",
     "scripts/gvm/worker-assignment.js",
+    "scripts/gvm/operation-requirements.js",
+    "scripts/gvm/action-popover.js",
+    "scripts/gvm/services.js",
+    "scripts/gvm/resident-effects.js",
     "scripts/gvm/journal-ui.js",
     "scripts/main.js"
   ],
