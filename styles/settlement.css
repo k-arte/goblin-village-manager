@@ -4,6 +4,7 @@
   overflow-y: auto !important;
   overflow-x: hidden;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 .gvm-window .window-content,
@@ -18,199 +19,204 @@
   box-sizing: border-box;
 }
 
-.gvm-header {
+.gvm-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
-  border-bottom: 1px solid #7776;
+  gap: 14px;
+  padding-bottom: 10px;
   margin-bottom: 12px;
-  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.gvm-header h2 {
+.gvm-top h2 {
   margin: 0;
-  font-size: 24px;
+  font-size: 26px;
 }
 
-.gvm-actions,
-.gvm-toolbar {
+.gvm-top p {
+  margin: 3px 0 0;
+  opacity: 0.8;
+}
+
+.gvm-top-actions,
+.gvm-create-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.gvm-actions button,
-.gvm-toolbar button,
-.gvm-root button {
+.gvm-control {
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 6px;
-  padding: 4px 8px;
-}
-
-.gvm-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
-  gap: 8px;
-  margin: 10px 0;
-}
-
-.gvm-card,
-.gvm-item-card,
-.gvm-section,
-.gvm-report {
-  border: 1px solid #7776;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.04);
-  padding: 9px;
-  box-sizing: border-box;
-}
-
-.gvm-card h4 {
-  margin: 0 0 4px;
-}
-
-.gvm-card strong {
-  display: block;
-  font-size: 22px;
-}
-
-.gvm-card small {
-  display: block;
-  opacity: 0.8;
-}
-
-.gvm-section {
-  margin: 12px 0;
-}
-
-.gvm-section h3 {
-  margin-top: 0;
-}
-
-.gvm-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
-  gap: 10px;
-}
-
-.gvm-item-card header {
-  display: grid;
-  grid-template-columns: 42px 1fr;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.gvm-item-card img {
-  width: 42px;
-  height: 42px;
-  border: 1px solid #7776;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-.gvm-item-card h4 {
-  margin: 0;
+  padding: 5px 9px;
+  background: rgba(255, 255, 255, 0.07);
+  color: inherit;
   cursor: pointer;
+  line-height: 1.15;
 }
 
-.gvm-item-card h4:hover {
-  text-decoration: underline;
+.gvm-control:hover {
+  background: rgba(255, 255, 255, 0.13);
 }
 
-.gvm-item-card small {
-  opacity: 0.8;
+.gvm-resources {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
-.gvm-item-card p {
-  margin: 4px 0;
+.gvm-resource {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  padding: 9px;
+  background: rgba(0, 0, 0, 0.14);
 }
 
-.gvm-note,
-.gvm-hint {
-  opacity: 0.8;
+.gvm-resource h4 {
+  margin: 0;
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.gvm-resource strong {
+  display: block;
+  font-size: 25px;
+  margin-top: 2px;
+}
+
+.gvm-resource span {
+  display: block;
   font-size: 12px;
-}
-
-.gvm-building-card.disabled,
-.gvm-building-card.locked,
-.gvm-building-card.available {
   opacity: 0.72;
 }
 
-.gvm-building-card.damaged {
-  box-shadow: 0 0 0 2px rgba(255, 150, 0, 0.45) inset;
-}
-
-.gvm-building-card.destroyed {
-  opacity: 0.45;
-  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.45) inset;
-}
-
-.gvm-toolbar {
-  border: 1px dashed #7778;
+.gvm-create-bar {
+  border: 1px dashed rgba(255, 255, 255, 0.22);
   border-radius: 10px;
   padding: 8px;
-  margin: 10px 0;
+  margin: 10px 0 12px;
 }
 
-.gvm-drop-zone.dragover {
-  outline: 2px dashed #7aa7ff;
-  background: rgba(100, 150, 255, 0.08);
+.gvm-section {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  margin: 12px 0;
+  background: rgba(0, 0, 0, 0.10);
+  overflow: hidden;
 }
 
-.gvm-form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 8px;
-}
-
-.gvm-form-grid label {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.gvm-form-grid input {
-  width: 100%;
-}
-
-.gvm-report ul {
-  margin: 4px 0 0;
-}
-
-/* v0.3.2 safer controls */
-.gvm-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  border: 1px solid #7778;
-  border-radius: 6px;
-  padding: 4px 8px;
-  background: rgba(255, 255, 255, 0.06);
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  min-height: 24px;
-  line-height: 1.2;
-}
-
-.gvm-button:hover {
-  background: rgba(255, 255, 255, 0.12);
-  text-decoration: none;
-}
-
-.gvm-toolbar,
-.gvm-actions {
-  align-items: center;
-}
-
-.gvm-drop-zone {
-  min-height: 60px;
-}
-
-.gvm-drop-zone.dragover {
+.gvm-section.dragover {
   outline: 2px dashed #7aa7ff;
   background: rgba(100, 150, 255, 0.12);
+}
+
+.gvm-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.gvm-section-header h3 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.gvm-section-header span {
+  opacity: 0.75;
+}
+
+.gvm-item-list,
+.gvm-report-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gvm-item-row {
+  display: grid;
+  grid-template-columns: 46px 1fr auto;
+  gap: 9px;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  cursor: pointer;
+}
+
+.gvm-item-row:last-child {
+  border-bottom: none;
+}
+
+.gvm-item-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gvm-item-img {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+}
+
+.gvm-item-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.gvm-item-subtitle,
+.gvm-item-desc,
+.gvm-item-meta {
+  font-size: 12px;
+  opacity: 0.78;
+  margin-top: 2px;
+}
+
+.gvm-item-meta {
+  opacity: 0.9;
+}
+
+.gvm-item-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.gvm-icon {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+}
+
+.gvm-icon:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.gvm-empty {
+  padding: 14px 10px;
+  opacity: 0.7;
+}
+
+.gvm-report-list > li {
+  padding: 9px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.gvm-report-list > li:last-child {
+  border-bottom: none;
+}
+
+.gvm-dialog ul {
+  margin-top: 4px;
 }

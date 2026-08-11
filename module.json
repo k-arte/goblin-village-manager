@@ -1,8 +1,8 @@
 {
   "id": "goblin-village-manager",
   "title": "Goblin Village Manager",
-  "description": "A settlement and city-builder manager for Foundry VTT D&D campaigns. Group Actor settlement tab, item-based buildings, reforms, orders and bonuses.",
-  "version": "0.3.3",
+  "description": "A Group Actor settlement manager for Foundry VTT D&D campaigns. Buildings, reforms, orders and bonuses are editable Items.",
+  "version": "0.4.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
@@ -13,6 +13,14 @@
     }
   ],
   "scripts": [
+    "scripts/gvm/constants.js",
+    "scripts/gvm/utils.js",
+    "scripts/gvm/data.js",
+    "scripts/gvm/state.js",
+    "scripts/gvm/items.js",
+    "scripts/gvm/cycle.js",
+    "scripts/gvm/dialogs.js",
+    "scripts/gvm/ui.js",
     "scripts/main.js"
   ],
   "styles": [

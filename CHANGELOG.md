@@ -1,39 +1,23 @@
 # Changelog
 
-## 0.3.3
-
-### Fixed
-
-- Stabilized release after failed experimental UI rewrite.
-- Restored last working item-based Group Actor settlement system.
-- Kept v0.3.2 functionality available as v0.3.3 release candidate.
-
-
-## 0.3.0
+## 0.4.0
 
 ### Added
 
+- Modular file structure.
 - Group Actor settlement tab.
-- Item-based buildings, reforms, orders and bonuses.
-- Settlement data stored on Group Actor flags.
-- Drag-and-drop GVM Items into settlement sections.
-- Native Item Sheet opening from settlement cards.
-- JSON editor for GVM Item data.
-- Create Building, Reform, Order and Bonus buttons.
-- Default Goblin Village item initialization.
-- Senate-based active project capacity.
-- Building upgrades as Order Items.
-- Player services stored on building Items.
-- Scrollable settlement tab.
-- One active bastion bonus rule.
+- Native item-style settlement rows.
+- Buildings, reforms, orders and bonuses as editable Actor Items.
+- Left click on an item row opens the GVM action dialog.
+- Right click on an item row opens the native Item Sheet.
+- Item Sheet and GVM JSON quick buttons.
+- Drag-and-drop ordinary Items into Buildings to import them as settlement buildings.
+- Settlement resources and settings stored on the Group Actor.
+- Cycle engine reads Group Actor Items.
+- Senate-based project capacity.
+- Building upgrades create Order Items.
+- Safer core icon usage to avoid missing image paths.
 
-### Changed
+### Notes
 
-- Settlement tab no longer appears on normal player character actors.
-- Cycle engine now reads Actor Items instead of hardcoded state arrays.
-
-### Known Issues
-
-- Compendium pack generation is not automated yet.
-- Custom Item Sheets are planned, but not included.
-- Effect editor is minimal and will be expanded.
+This version focuses on maintainability, modular architecture, stable Group Actor integration, and item-based settlement data.
