@@ -491,7 +491,10 @@ GVM.activatePanel = function activatePanel(actor, panel) {
       } else if (control === "rename-settlement") {
         GVM.renameSettlement(actor);
       } else if (control === "create-building") {
-        GVM.createBuildingDialog(actor);
+        const column = element.closest(".gvm-bastion-column");
+        const title = column?.querySelector("h3")?.innerText || "";
+        const category = /особ/i.test(title) ? GVM.FACILITY_CATEGORY.SPECIAL : GVM.FACILITY_CATEGORY.BASIC;
+        GVM.openBuildFacilityPicker(actor, category);
       } else if (control === "create-reform") {
         GVM.createReformDialog(actor);
       } else if (control === "create-order") {
