@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.5.1
+
+### Fixed
+
+- Fixed Group Actor tabs becoming empty after using the Settlement tab.
+- Restored Loyalty in the resource ribbon.
+- Fixed settlement management order so controls appear above buildings.
+- Added settlement rename control.
+- Hid empty Reform, Order and Bonus sections.
+- Added collapsible management and building sections.
+- Improved basic/special building classification.
+- Improved facility background image rendering using Item images.
+- Added color variants for buttons and statuses.
+- Added repeatable order template display support.
+
+
 ## 0.5.0
 
 ### Added
