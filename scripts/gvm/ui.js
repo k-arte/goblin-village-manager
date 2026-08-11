@@ -1,89 +1,189 @@
-GVM.renderResourceCard = function renderResourceCard(label, value, hint) {
+GVM.getSafeArtUrl = function getSafeArtUrl(value) {
+  const raw = String(value || GVM.SAFE_ICON);
+  return raw.replace(/["'()\\]/g, "");
+};
+
+GVM.getFacilityStatusLabel = function getFacilityStatusLabel(data) {
+  const labels = GVM.STATUS_LABELS || {
+    locked: "Закрыто",
+    available: "Доступно",
+    underConstruction: "Строится",
+    built: "Построено",
+    disabled: "Отключено",
+    damaged: "Повреждено",
+    destroyed: "Разрушено"
+  };
+
+  return labels[data.status] || data.status || "unknown";
+};
+
+GVM.getFacilityTypeLabel = function getFacilityTypeLabel(data) {
+  return GVM.BUILDING_TYPES[data.type] || data.type || "Постройка";
+};
+
+GVM.isSpecialFacility = function isSpecialFacility(item) {
+  const data = GVM.gvmData(item);
+  const specialTypes = GVM.SPECIAL_BUILDING_TYPES || new Set(["religion", "military", "crafting", "special"]);
+  return specialTypes.has(data.type);
+};
+
+GVM.getFacilityRenderData = function getFacilityRenderData(item) {
+  const data = GVM.gvmData(item);
+  const effects = data.effects || [];
+  const upkeep = data.upkeep || [];
+  const boons = Array.isArray(data.boons) ? data.boons : [];
+  const services = Array.isArray(data.services) ? data.services : [];
+  const workersRequired = Number(data.workersRequired || 0);
+  const workersAssigned = Number(data.workersAssigned || 0);
+
+  const slots = Array.isArray(data.slots)
+    ? data.slots
+    : Array.from({ length: Math.min(workersRequired, 6) }, (_value, index) => ({
+        type: "worker",
+        filled: index < workersAssigned,
+        icon: "fas fa-user"
+      }));
+
+  return {
+    id: item.id,
+    title: item.name,
+    type: data.type || "special",
+    typeLabel: GVM.getFacilityTypeLabel(data),
+    status: data.status || "unknown",
+    statusLabel: GVM.getFacilityStatusLabel(data),
+    level: Number(data.level || 0),
+    maxLevel: Number(data.maxLevel || 5),
+    workersRequired,
+    workersAssigned,
+    effects,
+    upkeep,
+    effectsLabel: GVM.effectsLabel(effects),
+    upkeepLabel: GVM.effectsLabel(upkeep),
+    boons,
+    services,
+    slots,
+    art: GVM.getSafeArtUrl(data.art || item.img || GVM.SAFE_ICON)
+  };
+};
+
+GVM.renderFacilitySlots = function renderFacilitySlots(slots) {
+  if (!slots || !slots.length) return "";
+
   return `
-    <div class="gvm-resource">
-      <h4>${GVM.escapeHtml(label)}</h4>
-      <strong>${GVM.escapeHtml(value)}</strong>
-      <span>${GVM.escapeHtml(hint || "")}</span>
+    <div class="gvm-facility-slots">
+      ${slots.map(slot => `
+        <span class="gvm-slot ${slot.filled ? "filled" : ""}" title="${GVM.escapeHtml(slot.type || "slot")}">
+          <i class="${GVM.escapeHtml(slot.icon || "fas fa-square")}"></i>
+        </span>
+      `).join("")}
     </div>
   `;
 };
 
-GVM.renderItemRow = function renderItemRow(item) {
-  const data = GVM.gvmData(item);
-  const kind = data.kind;
-  const description = GVM.stripHtml(item.system?.description?.value || "");
-  const img = item.img || GVM.SAFE_ICON;
-
-  let subtitle = "";
-  let meta = "";
-
-  if (kind === GVM.KIND.BUILDING) {
-    subtitle = `${GVM.BUILDING_TYPES[data.type] || data.type || "Здание"} · ${data.status || "unknown"} · L${Number(data.level || 0)}/${Number(data.maxLevel || 5)}`;
-    meta = `Рабочие ${Number(data.workersAssigned || 0)}/${Number(data.workersRequired || 0)} · ${GVM.effectsLabel(data.effects || [])}`;
-  } else if (kind === GVM.KIND.REFORM) {
-    subtitle = `Реформа · ${data.active ? "активна" : "выключена"} · интервал ${Number(data.interval || 1)}`;
-    meta = GVM.effectsLabel(data.effects || []);
-  } else if (kind === GVM.KIND.ORDER) {
-    subtitle = `Приказ · ${data.status || "unknown"} · ${Number(data.progress || 0)}/${Number(data.duration || 1)}`;
-    meta = `Стоимость: ${GVM.effectsLabel(data.cost || [])} · Итог: ${GVM.effectsLabel(data.effectsOnComplete || [])}`;
-  } else if (kind === GVM.KIND.BONUS) {
-    subtitle = `Бонус · ${data.active ? `активен, осталось ${Number(data.remaining || 0)}` : "неактивен"}`;
-    meta = `Цена: ${GVM.effectsLabel(data.cost || [])} · ${GVM.effectsLabel(data.effects || [])}`;
+GVM.renderFacilityBoons = function renderFacilityBoons(boons) {
+  if (!boons || !boons.length) {
+    return `
+      <section class="gvm-facility-boons">
+        <strong>Boons</strong>
+        <p>No boons configured.</p>
+      </section>
+    `;
   }
 
   return `
-    <li class="gvm-item-row" data-item-id="${item.id}">
-      " alt="">
-      <div class="gvm-item-main">
-        <div class="gvm-item-title">${GVM.escapeHtml(item.name)}</div>
-        <div class="gvm-item-subtitle">${GVM.escapeHtml(subtitle)}</div>
-        ${description ? `<div class="gvm-item-desc">${GVM.escapeHtml(description).slice(0, 180)}</div>` : ""}
-        <div class="gvm-item-meta">${GVM.escapeHtml(meta)}</div>
-      </div>
-      <div class="gvm-item-controls">
-        <button type="button" class="gvm-icon" data-gvm-control="sheet" title="Item Sheet">
-          <i class="fas fa-edit"></i>
-        </button>
-        <button type="button" class="gvm-icon" data-gvm-control="json" title="GVM JSON">
-          <i class="fas fa-code"></i>
-        </button>
-      </div>
-    </li>
-  `;
-};
-
-GVM.renderSection = function renderSection(title, kind, items) {
-  return `
-    <section class="gvm-section gvm-drop-zone" data-gvm-drop-kind="${kind}">
-      <header class="gvm-section-header">
-        <h3>${GVM.escapeHtml(title)}</h3>
-        <span>${items.length}</span>
-      </header>
-      <ol class="gvm-item-list">
-        ${items.length ? items.map(GVM.renderItemRow).join("") : `<li class="gvm-empty">Перетащите Item сюда или создайте новый.</li>`}
-      </ol>
+    <section class="gvm-facility-boons">
+      <strong>Boons</strong>
+      <ul>
+        ${boons.map(boon => `<li>${GVM.escapeHtml(boon.label || boon.name || String(boon))}</li>`).join("")}
+      </ul>
     </section>
   `;
 };
 
-GVM.renderReports = function renderReports(settings) {
-  const reports = settings.reports || [];
+GVM.renderFacilityServices = function renderFacilityServices(services) {
+  if (!services || !services.length) return "";
 
-  if (!reports.length) {
-    return `<li class="gvm-empty">Отчётов пока нет.</li>`;
-  }
+  return `
+    <section class="gvm-facility-services">
+      ${services.slice(0, 6).map(service => `<span>${GVM.escapeHtml(service)}</span>`).join("")}
+    </section>
+  `;
+};
 
-  return reports.map(report => {
-    const lines = (report.items || []).filter(line => GVM.isGM() || !String(line).startsWith("Скрыто"));
-    return `
-      <li>
-        <strong>${GVM.escapeHtml(report.title)}</strong>
-        <ul>
-          ${lines.map(line => `<li>${GVM.escapeHtml(line)}</li>`).join("")}
-        </ul>
-      </li>
-    `;
-  }).join("");
+GVM.renderFacilityCard = function renderFacilityCard(item) {
+  const facility = GVM.getFacilityRenderData(item);
+
+  return `
+    <article
+      class="gvm-facility-card status-${GVM.escapeHtml(facility.status)} type-${GVM.escapeHtml(facility.type)}"
+      data-item-id="${GVM.escapeHtml(facility.id)}"
+      style="--gvm-card-art: url('${GVM.escapeHtml(facility.art)}');"
+    >
+      <div class="gvm-facility-shade"></div>
+
+      <header class="gvm-facility-header">
+        <div class="gvm-facility-title-block">
+          <h4>${GVM.escapeHtml(facility.title)}</h4>
+          <span>${GVM.escapeHtml(facility.typeLabel)} · ${GVM.escapeHtml(facility.statusLabel)} · L${facility.level}/${facility.maxLevel}</span>
+        </div>
+
+        <button type="button" class="gvm-facility-action" data-gvm-control="facility-actions" title="Функции">
+          <i class="fas fa-hammer"></i>
+        </button>
+      </header>
+
+      ${GVM.renderFacilitySlots(facility.slots)}
+      ${GVM.renderFacilityBoons(facility.boons)}
+      ${GVM.renderFacilityServices(facility.services)}
+    </article>
+  `;
+};
+
+GVM.renderFacilityColumn = function renderFacilityColumn(title, icon, facilities, counterText) {
+  return `
+    <section class="gvm-bastion-column">
+      <header class="gvm-column-header">
+        <h3><i class="${GVM.escapeHtml(icon)}"></i> ${GVM.escapeHtml(title)}</h3>
+        ${counterText ? `<span>${GVM.escapeHtml(counterText)}</span>` : ""}
+      </header>
+
+      <div class="gvm-facility-list gvm-drop-zone" data-gvm-drop-kind="${GVM.KIND.BUILDING}">
+        ${facilities.length ? facilities.map(GVM.renderFacilityCard).join("") : `<div class="gvm-empty-card">Нет построек.</div>`}
+
+        ${GVM.isGM() ? `
+          <button type="button" class="gvm-build-placeholder" data-gvm-control="create-building">
+            Возвести постройку
+          </button>
+        ` : ""}
+      </div>
+    </section>
+  `;
+};
+
+GVM.renderManagementStrip = function renderManagementStrip(actor) {
+  const reforms = GVM.reforms(actor);
+  const orders = GVM.orders(actor);
+  const bonuses = GVM.bonuses(actor);
+
+  return `
+    <section class="gvm-management-strip">
+      <header>
+        <h3>Управление поселением</h3>
+      </header>
+
+      <div class="gvm-management-actions">
+        ${GVM.isGM() ? `<button type="button" class="gvm-control" data-gvm-control="create-reform">Создать реформу</button>` : ""}
+        ${GVM.isGM() ? `<button type="button" class="gvm-control" data-gvm-control="create-order">Создать приказ</button>` : ""}
+        ${GVM.isGM() ? `<button type="button" class="gvm-control" data-gvm-control="create-bonus">Создать бонус</button>` : ""}
+      </div>
+
+      <div class="gvm-management-summary">
+        <span>Реформы: ${reforms.length}</span>
+        <span>Приказы: ${orders.length}</span>
+        <span>Бонусы: ${bonuses.length}</span>
+      </div>
+    </section>
+  `;
 };
 
 GVM.renderSettlementPanel = async function renderSettlementPanel(actor, panel) {
@@ -94,6 +194,11 @@ GVM.renderSettlementPanel = async function renderSettlementPanel(actor, panel) {
   const derived = GVM.calculateDerived(actor);
   const hidden = settings.hiddenFromPlayers && !GVM.isGM();
 
+  const allBuildings = GVM.buildings(actor);
+  const commonBuildings = allBuildings.filter(item => !GVM.isSpecialFacility(item));
+  const specialBuildings = allBuildings.filter(item => GVM.isSpecialFacility(item));
+  const specialMax = Number(settings.specialBuildingLimit || 14);
+
   const threatText = GVM.isGM()
     ? resources.threat
     : settings.scouting.known
@@ -101,53 +206,40 @@ GVM.renderSettlementPanel = async function renderSettlementPanel(actor, panel) {
       : "неизвестно";
 
   panel.innerHTML = `
-    <div class="gvm-root" data-gvm-actor-id="${actor.id}">
-      <header class="gvm-top">
-        <div>
-          <h2>${GVM.escapeHtml(actor.name)}: Поселение</h2>
-          <p>Цикл ${Number(settings.cycle || 0)} · Проекты ${Number(derived.activeOrders || 0)}/${Number(derived.projectCapacity || 1)}</p>
-        </div>
-        <div class="gvm-top-actions">
-          ${GVM.isGM() ? `<button type="button" class="gvm-control" data-gvm-control="next-cycle">Следующий цикл</button>` : ""}
-          ${GVM.isGM() ? `<button type="button" class="gvm-control" data-gvm-control="init-defaults">Создать стартовые Items</button>` : ""}
-          ${GVM.isGM() ? `<button type="button" class="gvm-control" data-gvm-control="toggle-hidden">${settings.hiddenFromPlayers ? "Показать игрокам" : "Скрыть от игроков"}</button>` : ""}
-        </div>
+    <section class="gvm-bastion-board" data-gvm-actor-id="${actor.id}">
+      <header class="gvm-bastion-title">
+        <h1>${GVM.escapeHtml(actor.name)}</h1>
       </header>
 
-      <div class="gvm-resources">
-        ${GVM.renderResourceCard("Население", hidden ? "примерно" : resources.population, "рабочая сила")}
-        ${GVM.renderResourceCard("Еда", hidden ? "скрыто" : resources.food, `лимит ${derived.foodCapacity}`)}
-        ${GVM.renderResourceCard("Казна", hidden ? "скрыто" : resources.treasury, `лимит ${derived.treasuryCapacity}`)}
-        ${GVM.renderResourceCard("Военная сила", hidden ? "скрыто" : derived.military, "оборона")}
-        ${GVM.renderResourceCard("Лояльность", hidden ? "примерно" : resources.loyalty, "0-100")}
-        ${GVM.renderResourceCard("Привлекательность", hidden ? "скрыто" : derived.attractiveness, "миграция")}
-        ${GVM.renderResourceCard("Угроза", threatText, "разведка / GM")}
-      </div>
+      <section class="gvm-defenders-strip">
+        <h3><i class="fas fa-shield-alt"></i> Защитники</h3>
+        <p>Бастион без защиты.</p>
+      </section>
+
+      <section class="gvm-resource-ribbon">
+        <span>Население: ${GVM.escapeHtml(hidden ? "примерно" : resources.population)}</span>
+        <span>Еда: ${GVM.escapeHtml(hidden ? "скрыто" : resources.food)}</span>
+        <span>Казна: ${GVM.escapeHtml(hidden ? "скрыто" : resources.treasury)}</span>
+        <span>Военная сила: ${GVM.escapeHtml(hidden ? "скрыто" : derived.military)}</span>
+        <span>Угроза: ${GVM.escapeHtml(threatText)}</span>
+        <span>Цикл: ${Number(settings.cycle || 0)}</span>
+      </section>
 
       ${GVM.isGM() ? `
-        <div class="gvm-create-bar">
-          <button type="button" class="gvm-control" data-gvm-control="create-building">Создать здание</button>
-          <button type="button" class="gvm-control" data-gvm-control="create-reform">Создать реформу</button>
-          <button type="button" class="gvm-control" data-gvm-control="create-order">Создать приказ</button>
-          <button type="button" class="gvm-control" data-gvm-control="create-bonus">Создать бонус</button>
-        </div>
+        <section class="gvm-bastion-controls">
+          <button type="button" class="gvm-control" data-gvm-control="next-cycle">Следующий цикл</button>
+          <button type="button" class="gvm-control" data-gvm-control="init-defaults">Создать стартовые Items</button>
+          <button type="button" class="gvm-control" data-gvm-control="toggle-hidden">${settings.hiddenFromPlayers ? "Показать игрокам" : "Скрыть от игроков"}</button>
+        </section>
       ` : ""}
 
-      ${GVM.renderSection("Здания", GVM.KIND.BUILDING, GVM.buildings(actor))}
-      ${GVM.renderSection("Реформы", GVM.KIND.REFORM, GVM.reforms(actor))}
-      ${GVM.renderSection("Приказы / проекты", GVM.KIND.ORDER, GVM.orders(actor))}
-      ${GVM.renderSection("Бонусы", GVM.KIND.BONUS, GVM.bonuses(actor))}
+      <div class="gvm-bastion-columns">
+        ${GVM.renderFacilityColumn("Обычные постройки", "fas fa-chess-rook", commonBuildings, "")}
+        ${GVM.renderFacilityColumn("Особые постройки", "fas fa-landmark", specialBuildings, `${specialBuildings.length} / ${specialMax}`)}
+      </div>
 
-      <section class="gvm-section">
-        <header class="gvm-section-header">
-          <h3>Отчёты</h3>
-          <span>${settings.reports?.length || 0}</span>
-        </header>
-        <ol class="gvm-report-list">
-          ${GVM.renderReports(settings)}
-        </ol>
-      </section>
-    </div>
+      ${GVM.renderManagementStrip(actor)}
+    </section>
   `;
 
   GVM.activatePanel(actor, panel);
@@ -160,8 +252,8 @@ GVM.activatePanel = function activatePanel(actor, panel) {
       event.stopPropagation();
 
       const control = element.dataset.gvmControl;
-      const row = element.closest("[data-item-id]");
-      const item = row ? actor.items.get(row.dataset.itemId) : null;
+      const card = element.closest("[data-item-id]");
+      const item = card ? actor.items.get(card.dataset.itemId) : null;
 
       if (control === "next-cycle") {
         await GVM.advanceCycle(actor);
@@ -180,24 +272,24 @@ GVM.activatePanel = function activatePanel(actor, panel) {
         GVM.createOrderDialog(actor);
       } else if (control === "create-bonus") {
         GVM.createBonusDialog(actor);
-      } else if (control === "sheet" && item) {
-        item.sheet?.render(true);
-      } else if (control === "json" && item) {
-        GVM.editGvmData(actor, item);
+      } else if (control === "facility-actions" && item) {
+        GVM.itemActionDialog(actor, item);
       }
     });
   });
 
-  panel.querySelectorAll(".gvm-item-row").forEach(row => {
-    row.addEventListener("click", event => {
+  panel.querySelectorAll(".gvm-facility-card[data-item-id]").forEach(card => {
+    card.addEventListener("click", event => {
       if (event.target.closest("[data-gvm-control]")) return;
-      const item = actor.items.get(row.dataset.itemId);
+
+      const item = actor.items.get(card.dataset.itemId);
       if (item) GVM.itemActionDialog(actor, item);
     });
 
-    row.addEventListener("contextmenu", event => {
+    card.addEventListener("contextmenu", event => {
       event.preventDefault();
-      const item = actor.items.get(row.dataset.itemId);
+
+      const item = actor.items.get(card.dataset.itemId);
       if (item) item.sheet?.render(true);
     });
   });

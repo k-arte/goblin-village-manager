@@ -19,12 +19,14 @@
     "scripts/gvm/state.js",
     "scripts/gvm/items.js",
     "scripts/gvm/cycle.js",
+    "scripts/gvm/render-context.js",
     "scripts/gvm/dialogs.js",
     "scripts/gvm/ui.js",
     "scripts/main.js"
   ],
   "styles": [
-    "styles/settlement.css"
+    "styles/settlement.css",
+    "styles/bastion-theme.css"
   ],
   "languages": [],
   "packs": [],
