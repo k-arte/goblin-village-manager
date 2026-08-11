@@ -88,3 +88,88 @@
 .gvm-app .window-content {
   overflow-y: auto;
 }
+
+/* Embedded actor sheet settlement tab */
+.gvm-embedded-settlement-button {
+  white-space: nowrap;
+}
+
+.gvm-embedded-settlement-panel {
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.gvm-embedded-root {
+  padding: 8px;
+}
+
+.gvm-embedded-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #7776;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+}
+
+.gvm-embedded-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.gvm-embedded-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.gvm-embedded-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.gvm-embedded-card,
+.gvm-embedded-building,
+.gvm-embedded-line,
+.gvm-embedded-section {
+  border: 1px solid #7776;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 8px;
+}
+
+.gvm-embedded-card h4,
+.gvm-embedded-building h4 {
+  margin: 0 0 4px 0;
+}
+
+.gvm-embedded-card strong {
+  display: block;
+  font-size: 22px;
+}
+
+.gvm-embedded-card small {
+  display: block;
+  opacity: 0.8;
+}
+
+.gvm-embedded-section {
+  margin-top: 10px;
+}
+
+.gvm-embedded-section h3 {
+  margin-top: 0;
+}
+
+.gvm-embedded-building-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px;
+}
+
+.gvm-embedded-building.disabled {
+  opacity: 0.55;
+}

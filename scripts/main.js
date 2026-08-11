@@ -1412,6 +1412,228 @@
     }
   }
 
+
+  function getActorSheetRoot(app, html) {
+    if (html?.jquery) return html[0];
+    if (html instanceof HTMLElement) return html;
+    if (app?.element?.jquery) return app.element[0];
+    if (app?.element instanceof HTMLElement) return app.element;
+    return null;
+  }
+
+  function findActorPrimaryTabs(root) {
+    return root.querySelector(
+      'nav.sheet-tabs[data-group="primary"], nav.tabs[data-group="primary"], .sheet-tabs[data-group="primary"], nav.sheet-tabs, nav.tabs, .sheet-tabs'
+    );
+  }
+
+  function findActorTabBody(root) {
+    return root.querySelector(
+      '.sheet-body, .window-content form, form, .window-content'
+    );
+  }
+
+  function setEmbeddedSettlementActive(root, tabButton, tabPanel) {
+    const body = findActorTabBody(root) || root;
+    const tabPanels = body.querySelectorAll('.tab[data-tab], section[data-tab], div[data-tab]');
+    const tabButtons = root.querySelectorAll('[data-tab]');
+
+    for (const el of tabPanels) {
+      if (el === tabPanel) continue;
+      if (!el.classList.contains('gvm-embedded-settlement-panel')) {
+        el.classList.remove('active');
+        el.style.display = 'none';
+      }
+    }
+
+    for (const el of tabButtons) {
+      if (el === tabButton) continue;
+      el.classList.remove('active');
+    }
+
+    tabButton.classList.add('active');
+    tabPanel.classList.add('active');
+    tabPanel.style.display = '';
+  }
+
+  function restoreNormalActorTabs(root, tabPanel) {
+    if (!tabPanel) return;
+    tabPanel.classList.remove('active');
+    tabPanel.style.display = 'none';
+  }
+
+  function embeddedResourceCard(label, value, hint = "") {
+    return `
+      <article class="gvm-embedded-card">
+        <h4>${label}</h4>
+        <strong>${value}</strong>
+        ${hint ? `<small>${hint}</small>` : ""}
+      </article>
+    `;
+  }
+
+  function embeddedBuildingCard(b) {
+    const e = Math.round(eff(b) * 100);
+    const services = (b.services || []).length ? `<p><b>Сервисы:</b> ${b.services.join(", ")}</p>` : "";
+    return `
+      <article class="gvm-embedded-building ${b.status === "disabled" ? "disabled" : ""}">
+        <h4>${b.name}</h4>
+        <p><b>${BUILDING_TYPES[b.type] || b.type}</b> · ${b.status} · L${b.level}/${b.maxLevel} · ${e}%</p>
+        <p>Рабочие: ${b.workersAssigned}/${b.workersRequired}</p>
+        <p>Содержание: ${lines(b.upkeep, true)}</p>
+        <p>Производство: ${lines(b.production)}</p>
+        <p>Модификаторы: ${lines(b.modifiers)}</p>
+        ${services}
+      </article>
+    `;
+  }
+
+  async function renderEmbeddedSettlementPanel(panel) {
+    const state = await getState();
+    calculateDerived(state);
+
+    const hidden = state.hiddenFromPlayers && !isGM();
+    const activeProjects = activeProjectCount(state);
+
+    const threatText = isGM()
+      ? state.resources.threat
+      : state.scouting.known
+        ? `${state.scouting.threatMin}-${state.scouting.threatMax}`
+        : "неизвестно";
+
+    panel.innerHTML = `
+      <section class="gvm-embedded-root">
+        <header class="gvm-embedded-header">
+          <div>
+            <h2>${state.name}</h2>
+            <p>Цикл ${state.cycle} · Проекты: ${hidden ? "скрыто" : `${activeProjects} / ${state.derived.projectCapacity}`}</p>
+          </div>
+          <div class="gvm-embedded-actions">
+            open-fullОткрыть полный лист</button>
+            ${isGM() ? `next-cycleСледующий цикл</button>` : ""}
+            ${isGM() ? `toggle-hidden${state.hiddenFromPlayers ? "Показать игрокам" : "Скрыть от игроков"}</button>` : ""}
+          </div>
+        </header>
+
+        <div class="gvm-embedded-cards">
+          ${embeddedResourceCard("Население", hidden ? "примерно известно" : state.resources.population, "рабочая сила")}
+          ${embeddedResourceCard("Еда", hidden ? "скрыто" : state.resources.food, `вместимость ${state.derived.foodCapacity}`)}
+          ${embeddedResourceCard("Казна", hidden ? "скрыто" : state.resources.treasury, `вместимость ${state.derived.treasuryCapacity} gp`)}
+          ${embeddedResourceCard("Военная сила", hidden ? "скрыто" : state.derived.military, "оборона поселения")}
+          ${embeddedResourceCard("Лояльность", hidden ? "примерно известно" : state.resources.loyalty, "0-100")}
+          ${embeddedResourceCard("Привлекательность", hidden ? "скрыто" : state.derived.attractiveness, "миграция")}
+          ${embeddedResourceCard("Угроза", threatText, "разведка / GM")}
+        </div>
+
+        <section class="gvm-embedded-section">
+          <h3>Здания</h3>
+          ${
+            hidden
+              ? `<p>Данные зданий скрыты. Игроки получают информацию через отчёты или присутствие в поселении.</p>`
+              : `<div class="gvm-embedded-building-grid">${state.buildings.map(embeddedBuildingCard).join("")}</div>`
+          }
+        </section>
+
+        <section class="gvm-embedded-section">
+          <h3>Активные проекты</h3>
+          ${
+            hidden
+              ? `<p>Проекты скрыты.</p>`
+              : state.projects.filter(p => p.status === "active").length
+                ? state.projects.filter(p => p.status === "active").map(p => `<article class="gvm-embedded-line"><b>${p.name}</b><br>Прогресс: ${p.progress}/${p.duration}</article>`).join("")
+                : `<p>Нет активных проектов.</p>`
+          }
+        </section>
+
+        <section class="gvm-embedded-section">
+          <h3>Активные реформы</h3>
+          ${
+            hidden
+              ? `<p>Реформы скрыты.</p>`
+              : state.reforms.filter(r => r.active).length
+                ? state.reforms.filter(r => r.active).map(r => `<article class="gvm-embedded-line"><b>${r.name}</b><br>${r.description || ""}</article>`).join("")
+                : `<p>Нет активных реформ.</p>`
+          }
+        </section>
+      </section>
+    `;
+
+    panel.querySelector('[data-gvm-action="open-full"]')?.addEventListener("click", ev => {
+      ev.preventDefault();
+      new GoblinVillageApp().render(true);
+    });
+
+    panel.querySelector('[data-gvm-action="next-cycle"]')?.addEventListener("click", async ev => {
+      ev.preventDefault();
+      await advanceCycle();
+      await renderEmbeddedSettlementPanel(panel);
+    });
+
+    panel.querySelector('[data-gvm-action="toggle-hidden"]')?.addEventListener("click", async ev => {
+      ev.preventDefault();
+      const fresh = await getState();
+      fresh.hiddenFromPlayers = !fresh.hiddenFromPlayers;
+      await saveState(fresh);
+      await renderEmbeddedSettlementPanel(panel);
+    });
+  }
+
+  async function injectActorSettlementTab(app, html) {
+    try {
+      const actor = app.actor || app.document;
+      if (!actor) return;
+      if (actor.documentName !== "Actor") return;
+      if (!actor.testUserPermission(game.user, "OBSERVER")) return;
+
+      const root = getActorSheetRoot(app, html);
+      if (!root) return;
+
+      if (root.querySelector(".gvm-embedded-settlement-button")) return;
+
+      const tabs = findActorPrimaryTabs(root);
+      const body = findActorTabBody(root);
+
+      if (!tabs || !body) {
+        console.warn(`${MODULE_ID} | Could not find actor sheet tabs/body for embedded settlement tab.`);
+        return;
+      }
+
+      const tabButton = document.createElement("a");
+      tabButton.classList.add("item", "gvm-embedded-settlement-button");
+      tabButton.dataset.tab = "gvm-settlement";
+      tabButton.dataset.group = "primary";
+      tabButton.innerHTML = `<i class="fas fa-fort-awesome"></i> Поселение`;
+
+      tabs.appendChild(tabButton);
+
+      const tabPanel = document.createElement("section");
+      tabPanel.classList.add("tab", "gvm-embedded-settlement-panel");
+      tabPanel.dataset.tab = "gvm-settlement";
+      tabPanel.dataset.group = "primary";
+      tabPanel.style.display = "none";
+      tabPanel.innerHTML = `<section class="gvm-embedded-root"><p>Загрузка поселения...</p></section>`;
+
+      body.appendChild(tabPanel);
+
+      tabButton.addEventListener("click", async ev => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        setEmbeddedSettlementActive(root, tabButton, tabPanel);
+        await renderEmbeddedSettlementPanel(tabPanel);
+      });
+
+      for (const other of tabs.querySelectorAll("[data-tab]")) {
+        if (other === tabButton) continue;
+        other.addEventListener("click", () => restoreNormalActorTabs(root, tabPanel));
+      }
+
+      console.log(`${MODULE_ID} | Embedded settlement tab injected into actor sheet.`);
+    } catch (err) {
+      console.warn(`${MODULE_ID} | Failed to inject embedded settlement tab`, err);
+    }
+  }
+
+
   async function readySetup() {
     const state = await getState();
     await saveState(state);
@@ -1429,6 +1651,20 @@
 
   Hooks.once("init", registerSettings);
   Hooks.once("ready", readySetup);
+
+
+  Hooks.on("renderActorSheet", injectActorSettlementTab);
+  Hooks.on("renderActorSheetV2", injectActorSettlementTab);
+
+  Hooks.on("renderApplication", (app, html) => {
+    try {
+      const actor = app.actor || app.document;
+      if (!actor || actor.documentName !== "Actor") return;
+      injectActorSettlementTab(app, html);
+    } catch (err) {
+      // Ignore non-actor applications.
+    }
+  });
 
   Hooks.on("getActorSheetHeaderButtons", (app, buttons) => {
     try {
