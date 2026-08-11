@@ -1,0 +1,134 @@
+
+/**
+ * GVM v0.8.2 Building Presets
+ */
+
+.gvm-v082-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 12px 0;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(215, 166, 92, 0.24);
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.gvm-v082-toolbar button {
+  min-height: 32px;
+}
+
+.gvm-v082-toolbar button.danger,
+.gvm-v082-toolbar .danger {
+  border-color: rgba(220, 80, 70, 0.5) !important;
+  background: rgba(220, 80, 70, 0.12) !important;
+  color: #ff9a85 !important;
+}
+
+.gvm-v082-dialog {
+  color: #f6ead4;
+  font-size: 14px;
+}
+
+.gvm-v082-hero,
+.gvm-v082-danger,
+.gvm-v082-section {
+  padding: 13px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(215, 166, 92, 0.24);
+  background: rgba(5, 7, 11, 0.46);
+}
+
+.gvm-v082-danger {
+  border-color: rgba(220, 80, 70, 0.48);
+  background:
+    radial-gradient(circle at top left, rgba(220, 80, 70, 0.16), transparent 36%),
+    rgba(5, 7, 11, 0.52);
+}
+
+.gvm-v082-hero h2,
+.gvm-v082-danger h2,
+.gvm-v082-section h3 {
+  margin: 0 0 8px 0;
+  color: #ffdfa5;
+}
+
+.gvm-v082-danger h2 {
+  color: #ff9a85;
+}
+
+.gvm-v082-hero p,
+.gvm-v082-danger p,
+.gvm-v082-preset-row p {
+  margin: 0;
+  color: rgba(255, 239, 213, 0.72);
+  line-height: 1.45;
+}
+
+.gvm-v082-preset-list {
+  display: grid;
+  gap: 10px;
+}
+
+.gvm-v082-preset-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 13px;
+  border: 1px solid rgba(215, 166, 92, 0.22);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.gvm-v082-preset-row strong {
+  display: block;
+  color: #ffdfa5;
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.gvm-v082-preset-row span {
+  display: block;
+  color: rgba(255, 239, 213, 0.7);
+  font-size: 12px;
+}
+
+.gvm-v082-pill {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;
+  min-height: 24px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 214, 145, 0.32);
+  background: rgba(255, 214, 145, 0.1);
+  color: #ffdfa5 !important;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.gvm-v082-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 8px;
+}
+
+.gvm-v082-type-row {
+  padding: 9px;
+  border-radius: 11px;
+  border: 1px solid rgba(215, 166, 92, 0.18);
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.gvm-v082-type-row strong {
+  display: block;
+  color: #ffdfa5;
+}
+
+.gvm-v082-type-row span {
+  color: rgba(255, 239, 213, 0.66);
+  font-size: 12px;
+}

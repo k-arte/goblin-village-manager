@@ -1,0 +1,29 @@
+
+/**
+ * GVM v0.8.2 Starter Items + Reforms Bridge
+ */
+
+.gvm-v082-reform-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.gvm-v082-reform-tools button.danger,
+button[data-gvm-v082-delete-reform],
+.gvm-control.danger {
+  border-color: rgba(220, 80, 70, 0.5) !important;
+  background: rgba(220, 80, 70, 0.12) !important;
+  color: #ff9a85 !important;
+}
+
+.gvm-v082-dialog ul {
+  margin: 8px 0 0 18px;
+  padding: 0;
+}
+
+.gvm-v082-dialog li {
+  margin-bottom: 4px;
+  color: rgba(255, 239, 213, 0.78);
+}

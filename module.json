@@ -54,6 +54,9 @@
     "scripts/gvm/v080-ability-management.js",
     "scripts/gvm/v080-visual-content.js",
     "scripts/gvm/v080-cleanup.js",
+    "scripts/gvm/v081-resident-layout.js",
+    "scripts/gvm/v082-building-presets.js",
+    "scripts/gvm/v082-starter-items-reforms.js",
     "scripts/main.js"
   ],
   "styles": [
@@ -65,7 +68,10 @@
     "styles/v080-settings.css",
     "styles/v080-ability-management.css",
     "styles/v080-visual-content.css",
-    "styles/v080-cleanup.css"
+    "styles/v080-cleanup.css",
+    "styles/v081-resident-layout.css",
+    "styles/v082-building-presets.css",
+    "styles/v082-starter-items-reforms.css"
   ],
   "languages": [],
   "packs": [],

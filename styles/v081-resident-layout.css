@@ -1,0 +1,97 @@
+
+/**
+ * GVM v0.8.1 Resident final layout
+ */
+
+.gvm-v081-resident-card-final {
+  display: grid !important;
+  grid-template-columns: minmax(160px, 1fr) minmax(0, 2fr) !important;
+  gap: 18px !important;
+  align-items: stretch !important;
+  padding: 16px !important;
+  min-height: 190px !important;
+  overflow: hidden !important;
+}
+
+.gvm-v081-resident-portrait-column {
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+}
+
+.gvm-v081-resident-info-column {
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  justify-content: flex-start !important;
+}
+
+.gvm-v081-resident-portrait-wrap {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 158px !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  background: #080b10 !important;
+  border: 1px solid rgba(255, 214, 145, 0.55) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.38) !important;
+}
+
+.gvm-v081-resident-portrait-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+.gvm-v081-resident-name {
+  font-size: 25px !important;
+  line-height: 1.1 !important;
+  font-weight: 800 !important;
+  color: #ffdfa5 !important;
+  margin: 0 0 4px 0 !important;
+}
+
+.gvm-v081-resident-description {
+  display: grid !important;
+  gap: 5px !important;
+  font-size: 13px !important;
+  color: rgba(255, 239, 213, 0.84) !important;
+}
+
+.gvm-v081-resident-description div {
+  overflow-wrap: anywhere !important;
+}
+
+.gvm-v081-resident-actions {
+  margin-top: auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+  gap: 7px !important;
+}
+
+.gvm-v081-resident-actions button,
+.gvm-v081-resident-actions .gvm-mini-button,
+.gvm-v081-resident-actions .gvm-control {
+  width: 100% !important;
+  min-height: 32px !important;
+}
+
+.gvm-v081-resident-card-final .gvm-debug-resident-portrait,
+.gvm-v081-resident-card-final .gvm-v080-resident-portrait-box,
+.gvm-v081-resident-card-final .gvm-v081-resident-avatar-wrap {
+  display: none !important;
+}
+
+@media (max-width: 820px) {
+  .gvm-v081-resident-card-final {
+    grid-template-columns: 1fr !important;
+  }
+
+  .gvm-v081-resident-portrait-wrap {
+    height: 180px !important;
+  }
+}
