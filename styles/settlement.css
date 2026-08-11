@@ -178,3 +178,39 @@
 .gvm-report ul {
   margin: 4px 0 0;
 }
+
+/* v0.3.2 safer controls */
+.gvm-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid #7778;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  min-height: 24px;
+  line-height: 1.2;
+}
+
+.gvm-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+}
+
+.gvm-toolbar,
+.gvm-actions {
+  align-items: center;
+}
+
+.gvm-drop-zone {
+  min-height: 60px;
+}
+
+.gvm-drop-zone.dragover {
+  outline: 2px dashed #7aa7ff;
+  background: rgba(100, 150, 255, 0.12);
+}

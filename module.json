@@ -2,7 +2,7 @@
   "id": "goblin-village-manager",
   "title": "Goblin Village Manager",
   "description": "A settlement and city-builder manager for Foundry VTT D&D campaigns. Group Actor settlement tab, item-based buildings, reforms, orders and bonuses.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "compatibility": {
     "minimum": "13",
     "verified": "13"

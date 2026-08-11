@@ -887,6 +887,66 @@
     await setResources(actor, resources);
   }
 
+
+  function inferBuildingTypeFromItem(item) {
+    const name = String(item?.name || "").toLowerCase();
+
+    if (name.includes("barrack") || name.includes("казарм") || name.includes("guard") || name.includes("сторож")) return "military";
+    if (name.includes("temple") || name.includes("храм") || name.includes("sacristy") || name.includes("sanctuary")) return "religion";
+    if (name.includes("market") || name.includes("рынок") || name.includes("guild") || name.includes("auction") || name.includes("аукцион")) return "economy";
+    if (name.includes("greenhouse") || name.includes("garden") || name.includes("теплиц") || name.includes("сад")) return "food";
+    if (name.includes("store") || name.includes("warehouse") || name.includes("склад")) return "storage";
+    if (name.includes("smith") || name.includes("forge") || name.includes("кузн")) return "crafting";
+    if (name.includes("senate") || name.includes("war room") || name.includes("council") || name.includes("сенат")) return "governance";
+    if (name.includes("bath") || name.includes("pub") || name.includes("inn") || name.includes("theater") || name.includes("бани") || name.includes("гостиниц")) return "social";
+
+    return "special";
+  }
+
+  function makeBuildingDataFromDroppedItem(item) {
+    const buildingType = inferBuildingTypeFromItem(item);
+
+    return {
+      kind: KIND.BUILDING,
+      type: buildingType,
+      status: "available",
+      level: 0,
+      maxLevel: 5,
+      unlockLevel: 5,
+      workersRequired: 0,
+      workersAssigned: 0,
+      upkeep: [],
+      effects: [],
+      levels: [
+        {
+          level: 1,
+          title: `Построить: ${item.name}`,
+          description: `Здание создано из перетащенного Item: ${item.name}. Отредактируйте GVM JSON или Item Sheet, чтобы назначить стоимость, рабочих, эффекты и сервисы.`,
+          cost: [{ stat: "treasury", value: -100 }],
+          duration: 1,
+          workersRequired: 4,
+          upkeep: [{ stat: "treasury", value: -1 }],
+          effects: [],
+          services: []
+        }
+      ],
+      services: [],
+      note: `Импортировано из Item "${item.name}". Настройте свойства здания через ПКМ или кнопку GVM JSON.`
+    };
+  }
+
+  function getDragDataFromEvent(event) {
+    const modern = foundry?.applications?.ux?.TextEditor?.implementation;
+    if (modern?.getDragEventData) return modern.getDragEventData(event);
+    if (globalThis.TextEditor?.getDragEventData) return globalThis.TextEditor.getDragEventData(event);
+    try {
+      return JSON.parse(event.dataTransfer.getData("text/plain"));
+    } catch (err) {
+      return {};
+    }
+  }
+
+
   async function createGvmItem(actor, name, img, data) {
     const itemData = {
       name,
@@ -2025,12 +2085,12 @@
   }
 
   function activateSettlementPanelListeners(actor, panel) {
-    panel.querySelectorAll("[data-gvm-action]").forEach(el => {
+    panel.querySelectorAll("[data-gvm-act]").forEach(el => {
       el.addEventListener("click", async ev => {
         ev.preventDefault();
         ev.stopPropagation();
 
-        const action = el.dataset.gvmAction;
+        const action = el.dataset.gvmAct;
         const itemId = el.dataset.itemId;
         const item = itemId ? actor.items.get(itemId) : null;
 
@@ -2116,7 +2176,7 @@
         if (!isGM()) return;
 
         try {
-          const data = TextEditor.getDragEventData(ev);
+          const data = getDragDataFromEvent(ev);
           let dropped = null;
 
           if (data.uuid) dropped = await fromUuid(data.uuid);
@@ -2127,20 +2187,27 @@
             return;
           }
 
-          const dta = gvmData(dropped);
-          if (!dta.kind) {
-            ui.notifications.warn("Этот Item не содержит flags Goblin Village Manager. Откройте его JSON или создайте через вкладку поселения.");
-            return;
-          }
-
+          let dta = gvmData(dropped);
           const wanted = zone.dataset.gvmDropKind;
-          if (wanted && dta.kind !== wanted) {
+
+          const itemData = dropped.toObject();
+          delete itemData._id;
+
+          if (!dta.kind) {
+            if (wanted !== "building") {
+              ui.notifications.warn("Обычный Item можно автоматически импортировать только как здание. Для реформ, приказов и бонусов создайте GVM Item через кнопки.");
+              return;
+            }
+
+            itemData.flags = itemData.flags || {};
+            itemData.flags[FLAG_SCOPE] = {
+              data: makeBuildingDataFromDroppedItem(dropped)
+            };
+          } else if (wanted && dta.kind !== wanted) {
             ui.notifications.warn(`Этот Item имеет тип ${dta.kind}, а зона ожидает ${wanted}.`);
             return;
           }
 
-          const itemData = dropped.toObject();
-          delete itemData._id;
           await actor.createEmbeddedDocuments("Item", [itemData]);
 
           ui.notifications.info(`${dropped.name} добавлен в поселение.`);
