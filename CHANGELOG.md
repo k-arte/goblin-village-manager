@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.6.0
+
+### Added
+
+- Facility catalog with Basic and Special facilities.
+- Real facility levels with build costs, durations, workers, upkeep, effects, services and requirements.
+- Build picker that shows unbuilt facilities by category.
+- Construction flow that creates a building Item and an Order.
+- Demolition and delete options for buildings.
+- Settlement journal for the latest 14 events/cycles.
+- Attack resolution with population losses, military damage and threat reduction.
+- Successful attack defense now sends monster loot value to settlement treasury.
+- Journal display on the settlement sheet.
+
+### Changed
+
+- Starting buildings now use catalog-based facility data.
+- Building expansion and construction create journal entries.
+- Military strength can be reduced by military damage after attacks.
+
+### Notes
+
+- Attack loot belongs to the settlement treasury, not directly to player characters.
+
+
 ## 0.5.1
 
 ### Fixed

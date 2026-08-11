@@ -535,3 +535,141 @@
 .gvm-build-requirement.ok {
   color: #9fd29f;
 }
+
+/* v0.6.0 journal */
+.gvm-journal-section {
+  margin-top: 18px;
+  border: 1px solid rgba(230, 220, 200, 0.16);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.gvm-journal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gvm-journal-entry {
+  border: 1px solid rgba(230, 220, 200, 0.14);
+  border-radius: 7px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.gvm-journal-entry header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.gvm-journal-entry h4 {
+  margin: 0;
+  color: #e6e0d6;
+}
+
+.gvm-journal-entry header span {
+  color: #a99f91;
+  font-size: 12px;
+}
+
+.gvm-journal-entry ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.gvm-journal-entry li,
+.gvm-journal-entry p {
+  color: #c9c0b8;
+}
+
+.gvm-journal-entry.type-attack {
+  border-color: rgba(210, 90, 70, 0.35);
+}
+
+.gvm-journal-entry.type-building {
+  border-color: rgba(220, 184, 90, 0.35);
+}
+
+.gvm-journal-entry.type-migration {
+  border-color: rgba(110, 190, 130, 0.30);
+}
+
+.gvm-journal-entry.type-order {
+  border-color: rgba(140, 170, 210, 0.35);
+}
+
+.gvm-journal-entry.type-warning {
+  border-color: rgba(225, 165, 70, 0.45);
+}
+
+/* v0.6.0 journal */
+.gvm-journal-section {
+  margin-top: 18px;
+  border: 1px solid rgba(230, 220, 200, 0.16);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.gvm-journal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gvm-journal-entry {
+  border: 1px solid rgba(230, 220, 200, 0.14);
+  border-radius: 7px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.gvm-journal-entry header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.gvm-journal-entry h4 {
+  margin: 0;
+  color: #e6e0d6;
+}
+
+.gvm-journal-entry header span {
+  color: #a99f91;
+  font-size: 12px;
+}
+
+.gvm-journal-entry ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.gvm-journal-entry li,
+.gvm-journal-entry p {
+  color: #c9c0b8;
+}
+
+.gvm-journal-entry.type-attack {
+  border-color: rgba(210, 90, 70, 0.35);
+}
+
+.gvm-journal-entry.type-building {
+  border-color: rgba(220, 184, 90, 0.35);
+}
+
+.gvm-journal-entry.type-migration {
+  border-color: rgba(110, 190, 130, 0.30);
+}
+
+.gvm-journal-entry.type-order {
+  border-color: rgba(140, 170, 210, 0.35);
+}
+
+.gvm-journal-entry.type-warning {
+  border-color: rgba(225, 165, 70, 0.45);
+}
