@@ -31,6 +31,7 @@
     "scripts/gvm/build-flow.js",
     "scripts/gvm/attack-engine.js",
     "scripts/gvm/ui.js",
+    "scripts/gvm/worker-assignment.js",
     "scripts/gvm/journal-ui.js",
     "scripts/main.js"
   ],
