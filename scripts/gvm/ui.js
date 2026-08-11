@@ -224,7 +224,7 @@ GVM.renderFacilityCard = function renderFacilityCard(item) {
       </header>
 
       ${GVM.renderFacilitySlots(facility.slots)}
-      ${GVM.renderFacilityBoons(facility.boons)}
+      
       ${GVM.renderFacilityServices(facility.services)}
     </article>
   `;
@@ -394,10 +394,7 @@ GVM.renderSettlementPanel = async function renderSettlementPanel(actor, panel) {
         <h1>${GVM.escapeHtml(actor.name)}</h1>
       </header>
 
-      <section class="gvm-defenders-strip">
-        <h3><i class="fas fa-shield-alt"></i> Защитники</h3>
-        <p>Бастион без защиты.</p>
-      </section>
+      ${GVM.renderKeyResidentsSection(actor)}
 
       <section class="gvm-resource-ribbon">
         <span>Население: ${GVM.escapeHtml(hidden ? "примерно" : resources.population)}</span>
@@ -420,6 +417,8 @@ GVM.renderSettlementPanel = async function renderSettlementPanel(actor, panel) {
   `;
 
   GVM.applyFacilityBackgrounds(panel);
+  GVM.syncThemeAccent(panel);
+  GVM.activateResidentsPanel(actor, panel);
   GVM.activatePanel(actor, panel);
 };
 
@@ -509,6 +508,12 @@ GVM.activatePanel = function activatePanel(actor, panel) {
         await GVM.activateBonus(actor, item);
       } else if (control === "start-order-template" && item) {
         await GVM.startOrderTemplate(actor, item);
+      } else if (control === "configure-resident") {
+        const residentCard = element.closest("[data-resident-id]");
+        if (residentCard) GVM.openResidentConfig(actor, residentCard.dataset.residentId);
+      } else if (control === "remove-resident") {
+        const residentCard = element.closest("[data-resident-id]");
+        if (residentCard) await GVM.removeResident(actor, residentCard.dataset.residentId);
       } else if (control === "toggle-section") {
         const key = element.dataset.gvmSectionKey;
         const collapsed = GVM.sectionIsCollapsed(actor, key);
