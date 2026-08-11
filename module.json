@@ -12,7 +12,7 @@
       "name": "Hiro + M365 Copilot"
     }
   ],
-  "esmodules": [
+  "scripts": [
     "scripts/main.js"
   ],
   "styles": [
