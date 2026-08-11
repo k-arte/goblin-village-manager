@@ -1226,3 +1226,109 @@
 .gvm-drawer-group.danger-zone {
   border-top: 1px solid rgba(230, 120, 110, .20);
 }
+
+/* v0.7 stage 2: abilities and automatic bonuses/services */
+.gvm-abilities-section {
+  border: 1px solid rgba(230, 220, 200, 0.16);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 18px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.gvm-ability-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px;
+}
+
+.gvm-ability-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(230, 220, 200, 0.16);
+  border-radius: 8px;
+  padding: 9px;
+  min-height: 108px;
+  background-image:
+    linear-gradient(90deg, rgba(10, 13, 20, 0.94), rgba(10, 13, 20, 0.65)),
+    var(--gvm-card-art);
+  background-size: cover;
+  background-position: center;
+}
+
+.gvm-ability-card.available {
+  border-color: color-mix(in srgb, var(--gvm-accent, #c9593f) 52%, rgba(230,220,200,.18));
+}
+
+.gvm-ability-card.unavailable {
+  opacity: 0.62;
+  filter: grayscale(0.25);
+}
+
+.gvm-ability-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at right top, color-mix(in srgb, var(--gvm-accent, #c9593f) 10%, transparent), transparent 42%),
+    linear-gradient(180deg, rgba(255,255,255,.04), transparent 40%);
+  pointer-events: none;
+}
+
+.gvm-ability-card header,
+.gvm-ability-card p,
+.gvm-ability-meta,
+.gvm-ability-missing {
+  position: relative;
+  z-index: 1;
+}
+
+.gvm-ability-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.gvm-ability-card h4 {
+  margin: 0;
+  color: #e6e0d6;
+}
+
+.gvm-ability-card header span {
+  display: block;
+  color: #9ba7b8;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.gvm-ability-card p {
+  margin: 7px 0;
+  color: #c9c0b8;
+  font-size: 12px;
+}
+
+.gvm-ability-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.gvm-ability-meta span {
+  border: 1px solid rgba(230, 220, 200, 0.15);
+  border-radius: 999px;
+  padding: 1px 6px;
+  background: rgba(0,0,0,.22);
+  color: #c9c0b8;
+  font-size: 11px;
+}
+
+.gvm-ability-missing {
+  margin-top: 6px;
+  color: #e5a09a;
+  font-size: 11px;
+}
+
+.gvm-mini-button[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

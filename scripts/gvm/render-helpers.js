@@ -4,12 +4,32 @@ GVM.safeImg = function safeImg(src) {
 };
 
 GVM.renderImg = function renderImg(src, className = "", alt = "") {
-  return `}" alt="${GVM.escapeHtml(alt || "")}">`;
+  return `}" class="${GVM.escapeHtml(className || "")}" alt="${GVM.escapeHtml(alt || "")}">`;
 };
 
 GVM.getItemCardArt = function getItemCardArt(item) {
   const data = GVM.gvmData(item);
   return data.art || data.img || item.img || GVM.SAFE_ICON;
+};
+
+GVM.getSourceArt = function getSourceArt(source, fallback = null) {
+  if (!source) return fallback || GVM.SAFE_ICON;
+
+  if (source.rewardImg) return source.rewardImg;
+  if (source.img) return source.img;
+
+  if (source.buildingItemId && source.actor) {
+    const item = source.actor.items.get(source.buildingItemId);
+    if (item?.img) return item.img;
+  }
+
+  if (source.actorUuid) {
+    const id = String(source.actorUuid).split(".").at(-1);
+    const actor = game.actors.get(id);
+    if (actor?.img) return actor.img;
+  }
+
+  return fallback || GVM.SAFE_ICON;
 };
 
 GVM.getSettlementName = function getSettlementName(actor) {
@@ -64,13 +84,14 @@ GVM.confirmDeleteGvmItem = function confirmDeleteGvmItem(actor, item) {
       delete: {
         label: "Удалить",
         callback: async () => {
+          const name = item.name;
           await item.delete();
 
           if (GVM.addJournalEntry) {
             await GVM.addJournalEntry(actor, {
               type: "note",
-              title: `Удалено: ${item.name}`,
-              entries: [`Item "${item.name}" удалён из поселения.`]
+              title: `Удалено: ${name}`,
+              entries: [`Item "${name}" удалён из поселения.`]
             });
           }
 

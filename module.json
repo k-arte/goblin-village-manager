@@ -39,6 +39,8 @@
     "scripts/gvm/services.js",
     "scripts/gvm/resident-effects.js",
     "scripts/gvm/journal-ui.js",
+    "scripts/gvm/ability-model.js",
+    "scripts/gvm/ability-ui.js",
     "scripts/main.js"
   ],
   "styles": [
