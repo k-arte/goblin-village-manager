@@ -1,0 +1,177 @@
+/**
+ * Goblin Village Manager
+ * Stage 4 UX Redesign
+ */
+
+/* Dark GVM windows and dialogs */
+.gvm-stage4-window .window-content,
+.gvm-config-app .window-content,
+.dialog .window-content:has(.gvm-stage4-dialog),
+.dialog .window-content:has(.gvm-dialog),
+.dialog .window-content:has(.gvm-config-form),
+.dialog .window-content:has(.gvm-ability-builder-form) {
+  background:
+    radial-gradient(circle at top left, rgba(120, 85, 45, 0.2), transparent 34%),
+    linear-gradient(145deg, #11151b 0%, #07090d 100%) !important;
+  color: #f3ead7 !important;
+}
+
+.gvm-stage4-dialog,
+.gvm-config-form,
+.gvm-ability-builder-form,
+.gvm-dialog {
+  color: #f3ead7;
+}
+
+.gvm-stage4-dialog input,
+.gvm-stage4-dialog select,
+.gvm-stage4-dialog textarea,
+.gvm-config-form input,
+.gvm-config-form select,
+.gvm-config-form textarea,
+.gvm-ability-builder-form input,
+.gvm-ability-builder-form select,
+.gvm-ability-builder-form textarea,
+.gvm-dialog input,
+.gvm-dialog select,
+.gvm-dialog textarea {
+  background: rgba(8, 10, 14, 0.92) !important;
+  color: #f8ead2 !important;
+  border: 1px solid rgba(210, 166, 92, 0.52) !important;
+  border-radius: 8px;
+}
+
+.gvm-stage4-dialog button,
+.gvm-config-form button,
+.gvm-ability-builder-form button,
+.gvm-dialog button {
+  border-radius: 8px;
+}
+
+.gvm-stage4-hero {
+  padding: 14px 16px;
+  border: 1px solid rgba(210, 166, 92, 0.32);
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.24);
+  margin-bottom: 12px;
+}
+
+.gvm-stage4-hero h2 {
+  margin: 0 0 4px 0;
+  color: #ffe3aa;
+}
+
+.gvm-stage4-hero p {
+  margin: 0;
+  color: rgba(255, 238, 210, 0.78);
+}
+
+.gvm-stage4-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.gvm-stage4-stat {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 215, 145, 0.08);
+  border: 1px solid rgba(210, 166, 92, 0.24);
+  text-align: center;
+}
+
+.gvm-stage4-stat strong {
+  display: block;
+  font-size: 22px;
+  color: #ffd28a;
+}
+
+.gvm-stage4-stat span {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 238, 210, 0.72);
+}
+
+.gvm-stage4-note {
+  color: rgba(255, 238, 210, 0.68);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* Facility image recovery */
+.gvm-stage4-has-art,
+.gvm-facility-card.gvm-stage4-has-art {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.gvm-stage4-has-art > * {
+  position: relative;
+  z-index: 2;
+}
+
+.gvm-stage4-has-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(2, 4, 8, 0.86), rgba(2, 4, 8, 0.48)),
+    var(--gvm-card-art);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gvm-stage4-has-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(255, 203, 120, 0.18), transparent 38%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Resident portrait recovery */
+.gvm-stage4-has-portrait {
+  --gvm-resident-portrait-size: 54px;
+}
+
+.gvm-stage4-has-portrait img {
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(210, 166, 92, 0.5);
+  background: #0a0d12;
+}
+
+.gvm-stage4-has-portrait::before {
+  background-image: var(--gvm-resident-portrait);
+}
+
+/* Ability section becomes the only visible service/bonus hub */
+.gvm-abilities-section {
+  border: 1px solid rgba(210, 166, 92, 0.28);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 190, 100, 0.12), transparent 32%),
+    rgba(0, 0, 0, 0.2);
+  padding: 12px;
+}
+
+.gvm-ability-card {
+  border: 1px solid rgba(210, 166, 92, 0.28);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+}
+
+.gvm-ability-card.available {
+  border-color: rgba(104, 190, 116, 0.55);
+}
+
+.gvm-ability-card.unavailable {
+  opacity: 0.72;
+  filter: grayscale(0.35);
+}

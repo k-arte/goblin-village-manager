@@ -212,7 +212,9 @@ GVM.openAbilityBuilder = function openAbilityBuilder(actor, context = {}) {
           <div class="gvm-config-grid">
             <label class="gvm-config-field">
               <span>Ресурс</span>
-              <input type="text" name="costStat" value="treasury">
+              <select name="costStat">
+                ${GVM.renderStage4StatOptions ? GVM.renderStage4StatOptions("treasury") : `<option value="treasury">Казна</option>`}
+              </select>
             </label>
 
             <label class="gvm-config-field">
