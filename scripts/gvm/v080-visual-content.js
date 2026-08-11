@@ -97,19 +97,32 @@ GVM.v080ApplyResidentPortraits = function v080ApplyResidentPortraits(actor, root
     if (!portraitBox) {
       portraitBox = document.createElement("div");
       portraitBox.className = "gvm-v080-resident-portrait-box";
-      portraitBox.innerHTML = `
-        ${portrait}">
-      `;
+
+      const img = document.createElement("img");
+      img.className = "gvm-v080-resident-portrait";
+      img.src = portrait;
+      img.alt = name;
+      img.onerror = function () {
+        img.src = "icons/svg/mystery-man.svg";
+      };
+
+      portraitBox.appendChild(img);
 
       const header =
         card.querySelector("header") ||
         card.querySelector(".gvm-resident-header") ||
+        card.querySelector(".gvm-key-resident-header") ||
         card.firstElementChild ||
         card;
 
-      header.prepend(portraitBox);
+      header.classList.add("gvm-v080-resident-header-with-portrait");
+
+      if (!header.querySelector(".gvm-v080-resident-portrait-box")) {
+        header.prepend(portraitBox);
+      }
     } else {
       const img = portraitBox.querySelector("img");
+
       if (img) {
         img.src = portrait;
         img.alt = name;
