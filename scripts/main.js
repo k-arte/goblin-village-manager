@@ -1380,7 +1380,10 @@
             <h2>Отчёты</h2>
             ${
               state.reports.length
-                ? state.reports.map(r => `<article class="gvm-report"><h3>${r.title}</h3><ul>${r.items.filter(x => isGM() || !x.startsWith("Скрыто")).map(x => `<li>${x}</li>`).join("")}</ul></article>`).join("")
+                ? state.reports.map(r => {
+                  const reportItems = r.items || r.lines || [];
+                  return `<article class="gvm-report"><h3>${r.title}</h3><ul>${reportItems.filter(x => isGM() || !String(x).startsWith("Скрыто")).map(x => `<li>${x}</li>`).join("")}</ul></article>`;
+                }).join("")
                 : "<p>Отчётов пока нет.</p>"
             }
           </section>
